@@ -4,7 +4,7 @@ function battery -d 'Report on MacOS battery status'
     or set -l report time
 
     switch (string lower $report)
-        case life percent %
+        case percent %
             pmset -g batt |
             command awk '/InternalBattery/ { print $3 }' |
             command sed 's/;//'

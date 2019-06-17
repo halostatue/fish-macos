@@ -1,17 +1,15 @@
-# halostatue/fish-brew
+# halostatue/fish-macos
 
-Configuration and utilities for [Homebrew](https://brew.sh) in the
-<a href="https://fishshell.com" title="friendly interactive shell">fish
-shell</a>.
+Useful functions for MacOS using [fish shell][].
 
-[![Versin](https://img.shields.io/github/tag/halostatue/fish-brew.svg?label=Version)](https://github.com/halostatue/fish-utils/releases)
+[![Version][]][]
 
 ## Installation
 
-Install with [Fisher](https://github.com/jorgebucaran/fisher) (recommended):
+Install with [Fisher][] (recommended):
 
 ```fish
-fisher add halostatue/fish-brew
+fisher add halostatue/fish-macos
 ```
 
 <details>
@@ -19,50 +17,127 @@ fisher add halostatue/fish-brew
 
 ---
 
-Copy `functions/*.fish` and `conf.d/*.fish` to your fish configuration
-directory preserving the directory structure.
+Copy `functions/*.fish` to your fish configuration directory preserving the
+directory structure.
 </details>
 
 ### System Requirements
 
-- [fish](https://github.com/fish-shell/fish-shell) 3.0+
-
-## Startup Configuration (conf.d)
-
-Adds Homebrew paths to the Fish shell paths. This uses `path:unique` from
-[halostatue/fish-utils](https://github.com/halostatue/fish-utils) to manage
-`$PATH` and `$MANPATH`.
-
-If Homebrew is installed into `~/.brew` (my preferred installation location
-for Homebrew), this will be detected.
+- [fish][] 3.0+
 
 ## Functions
 
-### brew-prefix
+### airport
 
-```fish
-brew-prefix
-brew-prefix openssl
-```
+Work with Mac AirPort configurations. Has the following subcommands:
 
-An enhanced wrapper around `brew --prefix`.
+- `scan`: Scans the current AirPort configurations.
+- `ssid`: Prints the current AirPort network SSID.
+- `history`: Prints the history of network connections.
+- `on`: Turns AirPort `on`.
+- `off`: Turns AirPort `off`.
+- `password`: Recovers the current AirPort network password, or the password for
+  a specified SSID.
 
-### has:keg
+### battery
 
-```fish
-has:keg openssl
-```
+Report on battery status.
 
-Returns true if the named keg is installed.
+Reports time remaining by default; use `battery percent` or `battery %` to
+present the percentage of battery remaining.
 
-### with:keg:openssl
+### dash
 
-```fish
-with:keg:openssl make
-```
+Look up documentation in Dash.app.
 
-Since the OpenSSL keg is not linked and some
+### desktop-icons
+
+Manage the visibility of desktop icons. Has the following subcommands:
+
+- `hide`, `off`: Hides desktop icons.
+- `show`, `on`: Displays desktop icons.
+- `toggle`: Hides the desktop icons if currently visible, shows them otherwise.
+- `status`: Shows the current desktop icon visibility.
+
+### finder
+
+Links a Finder window with the current shell. Supports the following
+subcommands:
+
+- `track`: Turn on Finder/path tracking. The frontmost Finder window will be
+  updated when the current path changes in the current shell.
+- `untrack`: Turn off Finder/path tracking.
+- `list`, `icon`, `column`: Change the frontmost Finder window to the listed
+  view.
+- `pwd`: Print the current path of the frontmost Finder window.
+- `cd`: Changes the current path to that of the frontmost Finder window.
+- `clean`: Cleans the current path and subdirectories of `.DS_Store` files.
+- `show-hidden`: Shows hidden files in Finder.
+- `hide-hidden`: Hides hidden files in Finder.
+- `selected`: Prints a list of selected folders and files from Finder.
+
+### flushdns
+
+Flush the MacOS DNS cache.
+
+### has:app
+
+Returns true if the named MacOS application exists.
+
+### lock-screen
+
+Locks the screen.
+
+### lsclean
+
+Clean LaunchServices to remove duplicate 'Open with...' entries.
+
+### manp
+
+View a manpage in Preview.app.
+
+### note
+
+Add a note to Notes.app.
+
+### pdfmerge
+
+Merge one or more PDFs.
+
+### plistbuddy
+
+A wrapper for PlistBuddy.
+
+### ql
+
+QuickLook a file from the command-line.
+
+### quarantine
+
+Show or clear quarantine events and attributes. Supports the following
+subcommands:
+
+- `show`: Shows quarantine events from quarantine databases.
+- `clear`: Clears quarantine events from quarantine databases.
+- `clean`: Cleans the named file(s) of quarantine extended attributes.
+
+### quitapp
+
+Quits one or more named MacOS applications.
+
+### remind
+
+Add a note to Reminders.app.
+
+### vol
+
+Set or show the Mac audio volume.
 
 ## License
 
 [MIT](LICENCE.md)
+
+[Version]: https://img.shields.io/github/tag/halostatue/fish-macos.svg?label=Version
+[![Version][]]: https://github.com/halostatue/fish-macos/releases
+[Fisher]: https://github.com/jorgebucaran/fisher
+[fish]: https://github.com/fish-shell/fish-shell

@@ -1,9 +1,9 @@
-function __halostatue_fish_mac_desktop_icons_set
+function _halostatue_fish_mac_desktop_icons_set
     defaults write com.apple.finder CreateDesktop -bool $argv[1]
     and killall Finder
 end
 
-function __halostatue_fish_mac_desktop_icons_visible
+function _halostatue_fish_mac_desktop_icons_visible
     switch (defaults read com.apple.finder CreateDesktop 2>/dev/null)
         case 1
             true
@@ -13,7 +13,10 @@ function __halostatue_fish_mac_desktop_icons_visible
 end
 
 function desktop-icons -d 'Manage the visibility of desktop icons'
-    set -l verb (string lower $argv[1])
+    set -q argv[1]
+    and set -l verb (string lower $argv[1])
+    or set -l verb status
+
     switch $verb
         case hide off
             __halostatue_fish_mac_desktop_icons_set true

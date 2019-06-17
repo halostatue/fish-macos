@@ -1,7 +1,7 @@
 # Based on bashfinder: https://github.com/NapoleonWils0n/bashfinder.git
 # and my port to zsh.
 
-function __halostatue_fish_mac:update_finder_with_pwd
+function _halostatue_fish_mac_update_finder_with_pwd
     set -l window_count 1
     set -l view ''
     set -l view_type none
@@ -30,7 +30,7 @@ function __halostatue_fish_mac:update_finder_with_pwd
 end tell' | osascript >/dev/null
 end
 
-function __halostatue_fish_mac:get_frontmost_finder_path
+function _halostatue_fish_mac_get_frontmost_finder_path
     set -l window 1
     set -q argv[1]
     and set -l window $argv[1]
@@ -51,18 +51,19 @@ function finder -d 'Link the finder with the current shell'
 
     switch $verb
         case track
-            functions -q __halostatue_fish_mac:track_finder
-            or function __halostatue_fish_mac:track_finder --on-variable PWD
-              __halostatue_fish_mac:update_finder_with_pwd
+            functions -q _halostatue_fish_mac_track_finder
+            or function _halostatue_fish_mac_track_finder --on-variable PWD
+              _halostatue_fish_mac_update_finder_with_pwd
             end
+            _halostatue_fish_mac_update_finder_with_pwd
         case untrack
-            functions -e __halostatue_fish_mac:track_finder
+            functions -e _halostatue_fish_mac_track_finder
         case list icon column
-            __halostatue_fish_mac:update_finder_with_pwd $verb
+            _halostatue_fish_mac_update_finder_with_pwd $verb
         case pwd
-            __halostatue_fish_mac:get_frontmost_finder_path
+            _halostatue_fish_mac_get_frontmost_finder_path
         case cd
-            cd (__halostatue_fish_mac:get_frontmost_finder_path)
+            cd (_halostatue_fish_mac_get_frontmost_finder_path)
         case clean
             find . -type f -name '*.DS_Store' -ls -delete
         case show-hidden
@@ -79,7 +80,7 @@ function finder -d 'Link the finder with the current shell'
     set theList to theList & POSIX path of (aFile as alias) & "\n"
   end repeat
   theList
-end tell' | osacript
+end tell' | osascript
         case '*'
             echo >&2 'Usage: '(status function)' track|untrack|cd|pwd
        '(status function)' list|icon|column

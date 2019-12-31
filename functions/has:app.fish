@@ -6,12 +6,11 @@ function has:app -d 'Returns true if the named application exists'
     end
 
     set -l n Applications
-    set -l paths /$n ~/$n /$n/Xcode.app/Contents/$n
+    set -l paths /$n ~/$n /$n/Setapp /$n/Xcode.app/Contents/$n
     set -l apps $argv[1] $argv[1].app
 
-    for candidate in {$paths}{$apps}
-        test -d $candidate
-        or test -L $candidate
+    for candidate in {$paths}/{$apps}
+        test -d $candidate -o -L $candidate
         and return 0
     end
 

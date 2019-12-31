@@ -25,5 +25,8 @@ function airport -a cmd -d 'Manage MacOS airport configuration'
             and set -l $ssid (_halostatue_fish_macos_airport_ssid)
 
             security find-generic-password -D "AirPort network password" $ssid -gw
+        case '*'
+            echo 1>&2 Unknown command "'$cmd'".
+            return 1
     end
 end

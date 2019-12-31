@@ -1,6 +1,6 @@
 # halostatue/fish-macos
 
-Useful functions for MacOS using [fish shell][].
+Useful functions for macOS using [fish shell][].
 
 [![Version][]][]
 
@@ -26,6 +26,14 @@ directory structure.
 - [fish][] 3.0+
 
 ## Functions
+
+### airdrop
+
+Works with the Mac AirDrop configurations. Has the following subcommands:
+
+- `on`: Turns AirDrop on.
+- `off`: Turns AirDrop off.
+- `status`: Reports the status of AirDrop.
 
 ### airport
 
@@ -59,7 +67,7 @@ Manage the visibility of desktop icons. Has the following subcommands:
 - `toggle`: Hides the desktop icons if currently visible, shows them otherwise.
 - `status`: Shows the current desktop icon visibility.
 
-### finder
+### finder (cdf, pfd, pfs, pushdf)
 
 Links a Finder window with the current shell. Supports the following
 subcommands:
@@ -69,12 +77,24 @@ subcommands:
 - `untrack`: Turn off Finder/path tracking.
 - `list`, `icon`, `column`: Change the frontmost Finder window to the listed
   view.
-- `pwd`: Print the current path of the frontmost Finder window.
+- `pwd`: Print the current path of the frontmost Finder window. Accepts an
+  integer parameter specifying the Finder window depth to use (the frontmost
+  window is `1`). Also available as command `pfd`.
 - `cd`: Changes the current path to that of the frontmost Finder window.
+  Accepts an integer parameter specifying the finder window depth to use (the
+  frontmost window is `1`). Also available as command `cdf`.
+- `cd`: Changes the current path with pushd to that of the frontmost Finder
+  window. Accepts an integer parameter specifying the finder window depth to
+  use (the frontmost window is `1`). Also available as command `pushdf`.
 - `clean`: Cleans the current path and subdirectories of `.DS_Store` files.
-- `show-hidden`: Shows hidden files in Finder.
-- `hide-hidden`: Hides hidden files in Finder.
-- `selected`: Prints a list of selected folders and files from Finder.
+- `hidden`: Shows or hides hidden files in Finder. Accepts a parameter
+  `yes`/`true` or `no`/`false`. Also available as command `showhidden`.
+- `show-hidden`: Shows hidden files in Finder. Deprecated. Use `hidden`
+  instead.
+- `hide-hidden`: Hides hidden files in Finder. Deprecated. Use `hidden`
+  instead.
+- `selected`: Prints a list of selected folders and files from Finder. Also
+  available as command `pfs`.
 
 ### flushdns
 
@@ -82,7 +102,9 @@ Flush the MacOS DNS cache.
 
 ### has:app
 
-Returns true if the named MacOS application exists.
+Returns true if the named MacOS application exists. Searches in
+`/Applications`, `~/Applications`, `/Applications/Setapp`, and
+`/Applications/Xcode.app/Contents/Applications`.
 
 ### lock-screen
 
@@ -128,6 +150,10 @@ Quits one or more named MacOS applications.
 ### remind
 
 Add a note to Reminders.app.
+
+### trash
+
+Move one or more files into the Trash.
 
 ### vol
 

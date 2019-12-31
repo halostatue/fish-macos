@@ -53,7 +53,7 @@ function finder -d 'Link the finder with the current shell'
         case track
             functions -q _halostatue_fish_mac_track_finder
             or function _halostatue_fish_mac_track_finder --on-variable PWD
-              _halostatue_fish_mac_update_finder_with_pwd
+                _halostatue_fish_mac_update_finder_with_pwd
             end
             _halostatue_fish_mac_update_finder_with_pwd
         case untrack
@@ -61,26 +61,47 @@ function finder -d 'Link the finder with the current shell'
         case list icon column
             _halostatue_fish_mac_update_finder_with_pwd $verb
         case pwd
-            _halostatue_fish_mac_get_frontmost_finder_path
+            _halostatue_fish_mac_get_frontmost_finder_path $argv[2]
         case cd
-            cd (_halostatue_fish_mac_get_frontmost_finder_path)
+            cd (_halostatue_fish_mac_get_frontmost_finder_path $argv[2])
+        case pushd
+            pushd (_halostatue_fish_mac_get_frontmost_finder_path $argv[2])
         case clean
             find . -type f -name '*.DS_Store' -ls -delete
+        case hidden
+            set -l arg $argv[2]
+            test -z $arg
+            and set arg 'none-provided'
+
+            switch (string lower $arg)
+                case yes true
+                    set arg true
+                case no false
+                    set arg false
+                case '*'
+                    echo 2>&1 'Input value must be yes or no.'
+                    return 1
+            end
+
+            # Show/hide hidden files in Finder
+            defaults write com.apple.Finder AppleShowAllFiles -bool $arg
+            and killall Finder /System/Library/CoreServices/Finder.app
         case show-hidden
-            # Show/hide hidden files in Finder
-            defaults write com.apple.Finder AppleShowAllFiles -bool false && killall Finder
+            finder hidden yes
         case hide-hidden
-            # Show/hide hidden files in Finder
-            defaults write com.apple.Finder AppleShowAllFiles -bool true && killall Finder
+            finder hidden no
         case selected
-            echo 'tell application "Finder"
-  set theFiles to selection
-  set theList to ""
-  repeat with aFile in theFiles
-    set theList to theList & POSIX path of (aFile as alias) & "\n"
-  end repeat
-  theList
-end tell' | osascript
+            echo '
+  tell application "Finder" to set theSelection to selection
+  set output to ""
+  set itemCount to count theSelection
+  repeat with itemIndex from 1 to itemCount
+    if itemIndex is less than itemCount then set theDelimiter to "\n"
+    if itemIndex is itemCount then set theDelimiter to ""
+    set currentItem to (item itemIndex of theSelection as alias)
+    set currentItem to POSIX path of currentItem
+    set output to output & currentItem & theDelimiter
+  end repeat' | osascript
         case '*'
             echo >&2 'Usage: '(status function)' track|untrack|cd|pwd
        '(status function)' list|icon|column
@@ -91,6 +112,7 @@ end tell' | osascript
     untrack       Removes Finder directory tracking.
     pwd           Display the current directory to the current Finder path.
     cd            Changes the current directory to the current Finder path.
+    pushd         Pushes the current directory to the current Finder path.
     list          Changes the frontmost Finder window to the list view of the
                   current path.
     icon          Changes the frontmost Finder window to the icon view of the

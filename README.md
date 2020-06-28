@@ -19,6 +19,7 @@ fisher add halostatue/fish-macos
 
 Copy `functions/*.fish` to your fish configuration directory preserving the
 directory structure.
+
 </details>
 
 ### System Requirements
@@ -27,7 +28,91 @@ directory structure.
 
 ## Functions
 
-### airdrop
+### app
+
+Utilities for working with MacOS apps. Has the following subcommands:
+
+- `bundle`: Get the bundle ID for the application.
+- `find`: Finds the full application path.
+- `icon`: Obtains the application icon as a PNG.
+- `quit`: Quits the named application.
+
+### finder
+
+Operates with the Finder from the current shell.
+
+#### finder track
+
+Turn on Finder/path tracking. The frontmost Finder window will be updated
+when the current path changes in the current shell.
+
+#### finder untrack
+
+Turn off Finder/path tracking.
+
+#### finder pwd
+
+Print the current path of the frontmost Finder window. Accepts an integer
+parameter specifying the Finder window depth to use (the frontmost window is
+`1`).
+
+#### finder cd
+
+Changes the current path to that of the frontmost Finder window.
+Accepts an integer parameter specifying the finder window depth to use (the
+frontmost window is `1`).
+
+#### finder pushd
+
+Changes the current path with pushd to that of the frontmost
+Finder window. Accepts an integer parameter specifying the finder window
+depth to use (the frontmost window is `1`).
+
+#### finder {update, list, icon, column}
+
+Changes the Finder window to PWD. If `list`, `icon`, or `column` are used,
+uses the list, icon, or column view.
+
+#### finder clean
+
+Cleans the specified path and subdirectories of `.DS_Store` files.
+
+#### finder hidden
+
+Shows or hides hidden files in Finder. Accepts a parameter `on` (show the
+files), `off` (hide the files), or `toggle`. If no parameter is given,
+shows the current state.
+
+#### finder selected
+
+Prints a list of selected folders and files from Finder. Also
+available as command `pfs`.
+
+#### finder quarantine
+
+Show or clear quarantine events and attributes. Supports the following
+subcommands:
+
+- `show`: Shows quarantine events from quarantine databases.
+- `clear`: Clears quarantine events from quarantine databases.
+- `clean`: Cleans the named file(s) of quarantine extended attributes.
+
+#### finder desktop-icons
+
+Shows or hides the desktop icons. Accepts a parameter `on` (show the
+files), `off` (hide the files), or `toggle`. If no parameter is given,
+shows the current state.
+
+### has:app
+
+Returns true if one or more of the named MacOS application exists. This is a
+specialized wrapper around `app find`.
+
+### mac
+
+Manage various aspects of the modern MacOS interface.
+
+#### mac airdrop
 
 Works with the Mac AirDrop configurations. Has the following subcommands:
 
@@ -35,7 +120,7 @@ Works with the Mac AirDrop configurations. Has the following subcommands:
 - `off`: Turns AirDrop off.
 - `status`: Reports the status of AirDrop.
 
-### airport
+#### mac airport
 
 Work with Mac AirPort configurations. Has the following subcommands:
 
@@ -47,72 +132,21 @@ Work with Mac AirPort configurations. Has the following subcommands:
 - `password`: Recovers the current AirPort network password, or the password for
   a specified SSID.
 
-### battery
-
-Report on battery status.
-
-Reports time remaining by default; use `battery percent` or `battery %` to
-present the percentage of battery remaining.
-
-### dash
-
-Look up documentation in Dash.app.
-
-### desktop-icons
-
-Manage the visibility of desktop icons. Has the following subcommands:
-
-- `hide`, `off`: Hides desktop icons.
-- `show`, `on`: Displays desktop icons.
-- `toggle`: Hides the desktop icons if currently visible, shows them otherwise.
-- `status`: Shows the current desktop icon visibility.
-
-### finder (cdf, pfd, pfs, pushdf)
-
-Links a Finder window with the current shell. Supports the following
-subcommands:
-
-- `track`: Turn on Finder/path tracking. The frontmost Finder window will be
-  updated when the current path changes in the current shell.
-- `untrack`: Turn off Finder/path tracking.
-- `list`, `icon`, `column`: Change the frontmost Finder window to the listed
-  view.
-- `pwd`: Print the current path of the frontmost Finder window. Accepts an
-  integer parameter specifying the Finder window depth to use (the frontmost
-  window is `1`). Also available as command `pfd`.
-- `cd`: Changes the current path to that of the frontmost Finder window.
-  Accepts an integer parameter specifying the finder window depth to use (the
-  frontmost window is `1`). Also available as command `cdf`.
-- `cd`: Changes the current path with pushd to that of the frontmost Finder
-  window. Accepts an integer parameter specifying the finder window depth to
-  use (the frontmost window is `1`). Also available as command `pushdf`.
-- `clean`: Cleans the current path and subdirectories of `.DS_Store` files.
-- `hidden`: Shows or hides hidden files in Finder. Accepts a parameter
-  `yes`/`true` or `no`/`false`. Also available as command `showhidden`.
-- `show-hidden`: Shows hidden files in Finder. Deprecated. Use `hidden`
-  instead.
-- `hide-hidden`: Hides hidden files in Finder. Deprecated. Use `hidden`
-  instead.
-- `selected`: Prints a list of selected folders and files from Finder. Also
-  available as command `pfs`.
-
-### flushdns
+#### mac flushdns
 
 Flush the MacOS DNS cache.
 
-### has:app
-
-Returns true if the named MacOS application exists. Searches in
-`/Applications`, `~/Applications`, `/Applications/Setapp`, and
-`/Applications/Xcode.app/Contents/Applications`.
-
-### lock-screen
+#### mac lock-screen
 
 Locks the screen.
 
-### lsclean
+#### mac lsclean
 
 Clean LaunchServices to remove duplicate 'Open with...' entries.
+
+#### mac vol
+
+Set or show the Mac audio volume.
 
 ### manp
 
@@ -126,26 +160,9 @@ Add a note to Notes.app.
 
 Merge one or more PDFs.
 
-### plistbuddy
-
-A wrapper for PlistBuddy.
-
 ### ql
 
 QuickLook a file from the command-line.
-
-### quarantine
-
-Show or clear quarantine events and attributes. Supports the following
-subcommands:
-
-- `show`: Shows quarantine events from quarantine databases.
-- `clear`: Clears quarantine events from quarantine databases.
-- `clean`: Cleans the named file(s) of quarantine extended attributes.
-
-### quitapp
-
-Quits one or more named MacOS applications.
 
 ### remind
 
@@ -155,15 +172,12 @@ Add a note to Reminders.app.
 
 Move one or more files into the Trash.
 
-### vol
-
-Set or show the Mac audio volume.
-
 ## License
 
 [MIT](LICENCE.md)
 
-[Version]: https://img.shields.io/github/tag/halostatue/fish-macos.svg?label=Version
+[version]: https://img.shields.io/github/tag/halostatue/fish-macos.svg?label=Version
+
 [![Version][]]: https://github.com/halostatue/fish-macos/releases
 [Fisher]: https://github.com/jorgebucaran/fisher
 [fish]: https://github.com/fish-shell/fish-shell

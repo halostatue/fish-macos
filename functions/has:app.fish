@@ -1,18 +1,12 @@
 function has:app -d 'Returns true if the named application exists'
+    # Suppress these flags being passed to has:app.
+    argparse -x a,A 'a/any' 'A/all' 'q/quiet' -- $argv
+
     set -q argv[1]
     or begin
-        echo >&2 Usage: (status function) APP...
+        echo >&2 Usage: (status function) APPNAME...
         return 1
     end
 
-    set -l n Applications
-    set -l paths /$n ~/$n /$n/Setapp /$n/Xcode.app/Contents/$n
-    set -l apps $argv[1] $argv[1].app
-
-    for candidate in {$paths}/{$apps}
-        test -d $candidate -o -L $candidate
-        and return 0
-    end
-
-    return 1
+    app find --any --quiet $argv
 end

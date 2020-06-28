@@ -1,8 +1,10 @@
 function trash -d 'Move a specified file to the Trash'
     set -q argv[1]
     or begin
-        echo 1>&2 'usage: trash file ...
-       move file to trash, possibly appending timestamp'
+        echo >&2 '
+Usage: trash FILE...
+
+move file to trash, possibly appending timestamp'
         return 1
     end
 

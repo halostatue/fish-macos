@@ -1,5 +1,5 @@
 function note -d 'Add a note to Notes.app'
-    is:mac-at-least 'mountain lion'
+    is:mac 'mountain lion'
     or return 1
 
     set -q argv

@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright (c) 2019 Austin Ziegler
+Copyright © 2019, 2020 Austin Ziegler
 
 Some functions derived from oh-my-fish/plugin-osx, copyright 2014 Brun
 Ferreira Pinto.

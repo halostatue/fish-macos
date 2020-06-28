@@ -10,7 +10,7 @@
 - Moved `quarantine` to `finder quarantine`.
 - Moved `desktop-icons` to `finder desktop-icons`.
 - Removed `finder show-hidden` and `finder hide-hidden`.
-- Removed 'plistbuddy'.
+- Removed `plistbuddy`. Prefer using `plutil`.
 - Removed `dash`; this exists in `halostatue/fish-macos-apps` instead.
 - Removed `battery`. Use either `halostatue/fish-battery` or
   `oh-my-fish/plugin-battery` instead.

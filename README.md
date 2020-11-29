@@ -9,7 +9,11 @@ Useful functions for macOS using [fish shell][].
 Install with [Fisher][] (recommended):
 
 ```fish
+# Fisher 3.x
 fisher add halostatue/fish-macos
+
+# Fisher 4.0+
+fisher install halostatue/fish-macos
 ```
 
 <details>

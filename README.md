@@ -10,10 +10,10 @@ Install with [Fisher][fisher] (recommended):
 
 ```fish
 # Fisher 3.x
-fisher add halostatue/fish-macos@3.x
+fisher add halostatue/fish-macos@v3.x
 
 # Fisher 4.0+
-fisher install halostatue/fish-macos@3.x
+fisher install halostatue/fish-macos@v3.x
 ```
 
 <details>

@@ -1,12 +1,12 @@
 # halostatue/fish-macos
 
-Useful functions for macOS using [fish shell][].
+Useful functions for macOS using [fish shell][fish].
 
-[![Version][]][]
+[![Version][version]](https://github.com/halostatue/fish-macos/releases)
 
 ## Installation
 
-Install with [Fisher][] (recommended):
+Install with [Fisher][fisher] (recommended):
 
 ```fish
 # Fisher 3.x
@@ -28,7 +28,7 @@ directory structure.
 
 ### System Requirements
 
-- [fish][] 3.0+
+- [fish][fish] 3.0+
 
 ## Functions
 
@@ -181,7 +181,5 @@ Move one or more files into the Trash.
 [MIT](LICENCE.md)
 
 [version]: https://img.shields.io/github/tag/halostatue/fish-macos.svg?label=Version
-
-[![Version][]]: https://github.com/halostatue/fish-macos/releases
-[Fisher]: https://github.com/jorgebucaran/fisher
+[fisher]: https://github.com/jorgebucaran/fisher
 [fish]: https://github.com/fish-shell/fish-shell

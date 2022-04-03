@@ -1,9 +1,12 @@
 function _halostatue_fish_macos_uninstall -e halostatue_fish_macos_uninstall
-    functions -e (functions -a | command awk '
-        /_halostatue_fish_macos_|^app$|^app::|^finder$|^finder::|^mac$|^mac::/
-    ')
+    functions -e (
+      functions -a |
+      string match --entire --regex '_halostatue_fish_macos_|^app$|^app::|^finder$|^finder::|^mac$|^mac::'
+    ) has:app manp note pdfmerge ql remind trash
 
-    complete -ec app
-    complete -ec finder
-    complete -ec mac
+    complete --erase --command app
+    complete --erase --command finder
+    complete --erase --command mac
+    complete --erase --command manp
+    complete --erase --command ql
 end

@@ -1,8 +1,8 @@
-function mac::airdrop -a subcommand -d 'Manage MacOS AirDrop configuration'
+function mac::airdrop -a subcommand
     switch (string lower $subcommand)
-        case on up
+        case on
             sudo ifconfig awdl0 up
-        case off down
+        case off
             sudo ifconfig awdl0 down
         case status
             ifconfig awdl0 | awk '/status:/ { print $2; }'
@@ -23,8 +23,7 @@ end
 
 function mac::airport::history
     defaults read \
-        /Library/Preferences/SystemConfiguration/com.apple.airport.preferences | \
-        awk '/LastConnected/,/SecurityType/ {
+        /Library/Preferences/SystemConfiguration/com.apple.airport.preferences | awk '/LastConnected/,/SecurityType/ {
   nm = $1;
   $1 = $2 = "";
   gsub(/[";]/, "");
@@ -53,7 +52,7 @@ END {
 }'
 end
 
-function mac::airport -a cmd -d 'Manage MacOS airport configuration'
+function mac::airport -a cmd
     set -e argv[1]
 
     switch $cmd
@@ -80,23 +79,23 @@ function mac::airport -a cmd -d 'Manage MacOS airport configuration'
     end
 end
 
-function mac::flushdns -d 'Flush MacOS DNS Cache'
+function mac::flushdns
     dscacheutil -flushcache
     and killall -HUP mDNSResponder
 end
 
-function mac::lock-screen -d 'Lock the screen'
+function mac::lock-screen
     /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession \
         -suspend $argv
 end
 
-function mac::lsclean -d 'Clean LaunchServices to remove duplicate Open with...'
+function mac::lsclean
     /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister \
         -kill -r -domain local -domain system -domain user
     and killall Finder
 end
 
-function mac::vol -a action -d 'Set or show the Mac audio volume'
+function mac::vol -a action
     if set -q action
         set action (string lower $action)
     else
@@ -115,7 +114,7 @@ function mac::vol -a action -d 'Set or show the Mac audio volume'
     end
 end
 
-function mac -a subcommand -d 'Manage several MacOS functions'
+function mac -a subcommand -d 'Manage several macOS functions'
     set -e argv[1]
 
     switch (string lower $subcommand)

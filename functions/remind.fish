@@ -1,4 +1,4 @@
-function node -d 'Add a reminder to Reminders.app'
+function remind -d 'Add a reminder to Reminders.app'
     is:mac 'mountain lion'
     or return 1
 

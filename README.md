@@ -10,10 +10,10 @@ Install with [Fisher][] (recommended):
 
 ```fish
 # Fisher 3.x
-fisher add halostatue/fish-macos
+fisher add halostatue/fish-macos@3.x
 
 # Fisher 4.0+
-fisher install halostatue/fish-macos
+fisher install halostatue/fish-macos@3.x
 ```
 
 <details>
@@ -176,7 +176,7 @@ Add a note to Reminders.app.
 
 Move one or more files into the Trash.
 
-## License
+## Licence
 
 [MIT](LICENCE.md)
 

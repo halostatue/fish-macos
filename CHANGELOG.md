@@ -1,5 +1,29 @@
 # fish-macos Changelog
 
+## 3.0
+
+- Rewrote the `app` function to more consistently use `app find` for the other
+  subcommands. `app find` is more robust and does not depend on glob matching.
+  Alternative spellings of `app bundleid` are no longer accepted. Various flags
+  have been changed, added, or removed:
+
+  - All subcommands support `--help`
+  - All subcommands support `--exact`, which is forwarded to `app find`, which
+    makes the pattern match stricter, but is not incompatible with `--all`.
+  - `app find` no longer accepts `--any`; the short form for `--all` is now
+    `-a`, not `-A`.
+  - The `app quit` short form for `--restart` is now `-r`, not `-R`.
+
+- Fixed the remind function definition.
+
+- Updated the `mac` app to remove some subcommand or argument aliases.
+
+  - `mac airdrop` no longer supports `up` and `down`, but only `on` and `off`
+
+- Added completion wrappers for `manp` and `ql`.
+
+- Improved the uninstall function.
+
 ## 2.0
 
 - Added `app` function. Adds new functionality and replaces `quitapp`.

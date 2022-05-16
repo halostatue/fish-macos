@@ -1,0 +1,94 @@
+function __macos_app_icon
+    argparse -n 'app quit' x/exact h/help 'o/output=' 'w/width=' -- $argv
+    or return 1
+
+    if set -q _flag_help
+        echo 'Usage: app icon [options] pattern...
+
+Extracts macOS app icons as PNG (see `app find` for how applications
+are found).
+
+Options
+  -x, --exact             Perform exact matches only
+  -oOUTPUT                Output to the file or directory specified
+  --output OUTPUT         Output to the file or directory specified
+  -wWIDTH                 Outputs to a maximum of WIDTH pixels
+  --width WIDTH           Outputs to a maximum of WIDTH pixels
+  -h, --help              Show this help'
+        return 0
+    end
+
+    if test (count $argv) -eq 0
+        echo >&2 'app icon: Not enough arguments.'
+        __macos_app_icon --help >&2
+        return 1
+    end
+
+
+    set -l apps
+
+    if set -q _flag_exact
+        set apps (__macos_app_find --exact $argv)
+        or return 1
+    else
+        set apps (__macos_app_find --all $argv)
+        or return 1
+    end
+
+    set -l app_count (count $apps)
+
+    set -l output_path $PWD
+    if not test -z $_flag_output
+        if test -e $_flag_output
+            if test -f $_flag_output
+                if test $app_count -gt 1
+                    echo >&2 'app icon: More than one application found, but only one output file specified.'
+                    return 1
+                end
+
+                set output_path (dirname $_flag_output)
+                set output_file (basename $_flag_output)
+            else if test -d $_flag_output
+                set output_path $_flag_output
+            else
+                echo >&2 'app icon: Output to a non-file or directory specified.'
+                return 1
+            end
+        else
+            set output_path $_flag_output
+            mkdir -p $output_path
+        end
+    end
+
+    for app in $apps
+        set -l icon $app/Contents/Resources/(
+            defaults read $app/Contents/Info CFBundleIconFile |
+            string replace -r '\.icns$' ''
+        ).icns
+
+        set -l name (basename $app .app)_icon.png
+        set -l tmp $TMPDIR/$name
+        set -l max_width (sips -g pixelWidth $icon | tail -1 | awk '{ print $2; }')
+
+        set -l outfile
+        set -l width
+
+        if test -z $output_file
+            set outfile $output_path/$name
+        else
+            set outfile $output_path/$output_file
+        end
+
+        if test -z $_flag_width
+            set width $max_width
+        else if test $_flag_width -gt $max_width
+            set width $max_width
+        else
+            set width $_flag_width
+        end
+
+        sips -s format png --resampleHeightWidthMax $width $icon --out $outfile >/dev/null 2>&1
+
+        echo Wrote $app icon to $outfile.
+    end
+end

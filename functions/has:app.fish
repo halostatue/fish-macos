@@ -8,5 +8,5 @@ function has:app -d 'Returns true if the named application exists'
         return 1
     end
 
-    app::find --exact --quiet $argv
+    __macos_app_find --exact --quiet $argv
 end

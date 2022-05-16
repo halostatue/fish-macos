@@ -1,6 +1,12 @@
 # fish-macos Changelog
 
-## 3.0
+## 4.0 / 2022-05-16
+
+- Extracted the various sub-functions only loaded when `app` is run (and `mac`
+  and `finder`) so that they can be called more reliably. This is now much
+  better and fixes a bug with `has:app`.
+
+## 3.0 / 2022-04-02
 
 - Rewrote the `app` function to more consistently use `app find` for the other
   subcommands. `app find` is more robust and does not depend on glob matching.
@@ -24,7 +30,7 @@
 
 - Improved the uninstall function.
 
-## 2.0
+## 2.0 / 2020-06-28
 
 - Added `app` function. Adds new functionality and replaces `quitapp`.
 - Added `mac` function. Replaces `airdrop` (`mac airdrop`), `airport`
@@ -40,7 +46,7 @@
   `oh-my-fish/plugin-battery` instead.
 - Removed aliases to `finder` subcommands.
 
-## 1.2
+## 1.2 / 2019-12-31
 
 - Added `airdrop`, `trash`, and several aliases to subcommands for `finder`
   (matching [oh-my-fish/plugin-osx][]).
@@ -49,11 +55,11 @@
 
 - Fixed a bug in `has:app` and the uninstaller.
 
-## 1.1
+## 1.1 / 2019-06-17
 
 - Improved several utilities and added an uninstaller.
 
-## 1.0
+## 1.0 / 2019-06-16
 
 - Initial version
 

@@ -1,10 +1,25 @@
 # fish-macos Changelog
 
-## 4.0 / 2022-05-16
+## 4.0 / 2022-06-11
 
 - Extracted the various sub-functions only loaded when `app` is run (and `mac`
   and `finder`) so that they can be called more reliably. This is now much
-  better and fixes a bug with `has:app`.
+  better and fixes a bug with `has:app` where applications installed in
+  /System/Applications (new with macOS 11 and later) were not found.
+
+- Remove the function `pdfmerge`. This has been turned into a script that will
+  work both on macOS and on any system with Ghostscript installed. It will be
+  published later.
+
+- Fixed the `remind` function so that it will fail if the Reminders app is not
+  installed _or_ the provided text is empty.
+
+- Fixed the `note` function so that it will fail if the Notes app is not
+  installed _or_ the provided text is empty.
+
+- Added `mac version` command to show the current macOS version in one of
+  several different ways. This depends on halostatue/fish-utils-core@v2.1 or
+  higher.
 
 ## 3.0 / 2022-04-02
 

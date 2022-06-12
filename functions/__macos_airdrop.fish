@@ -4,7 +4,7 @@ function __macos_airdrop -a subcommand
             sudo ifconfig awdl0 up
         case off
             sudo ifconfig awdl0 down
-        case status
+        case status ''
             ifconfig awdl0 | awk '/status:/ { print $2; }'
         case '*'
             echo >&2 Unknown command "'$cmd'".

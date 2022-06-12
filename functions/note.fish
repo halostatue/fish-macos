@@ -2,9 +2,19 @@ function note -d 'Add a note to Notes.app'
     is:mac 'mountain lion'
     or return 1
 
-    set -q argv
-    and set -l text $argv
-    or set -l text (cat - | sed -e 's/$/<br>/')
+    has:app Notes
+    or return 1
+
+    set -l text
+
+    if set -q argv
+        set text $argv
+    else
+        set text (cat - | sed -e 's/$/<br>/')
+    end
+
+    test -z $text
+    or return 1
 
     set -l head $text[1]
     set -q text[2]

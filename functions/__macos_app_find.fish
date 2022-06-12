@@ -7,8 +7,8 @@ function __macos_app_find
 
 Shows installed apps by the provided pattern or patterns. Searches for
 apps in /Applications, /Applications/Setapp, /Applications/Utilities,
-~/Applications, /Appliciations/Xcode.app/Contents/Applications, and
-/Developer/Applications.
+~/Applications, /Appliciations/Xcode.app/Contents/Applications,
+/Developer/Applications, and /System/Applications.
 
 Options
   -x, --exact             Perform exact matches only
@@ -40,7 +40,8 @@ Examples
         /$a/Setapp \
         /$a/Utilities \
         /$a/Xcode.app/Contents/$a \
-        /Developer/Applications
+        /Developer/Applications \
+        /System/Applications
 
     set -l found 0
 

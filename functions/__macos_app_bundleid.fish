@@ -1,5 +1,5 @@
 function __macos_app_bundleid
-    argparse -n 'app bundleid' x/exact h/help -- $argv
+    argparse -n 'app bundleid' x/exact a/all h/help q/quiet s/short -- $argv
     or return 1
 
     if set -q _flag_help
@@ -10,6 +10,9 @@ pattern (see `app find` for how applications are found).
 
 Options
   -x, --exact             Perform exact matches only
+  -a, --all               Show all matches
+  -q, --quiet             Suppress error output
+  -s, --short             Prints out the bundle IDs only
   -h, --help              Show this help
 
 Examples
@@ -28,23 +31,21 @@ Examples
         return 1
     end
 
-    set -l apps
-
-    if set -q _flag_exact
-        set apps (__macos_app_find --exact $argv)
-        or return 1
-    else
-        set apps (__macos_app_find --all $argv)
-        or return 1
-    end
+    set -l apps (__macos_app_find $_flag_exact $_flag_all $argv)
+    or return 1
 
     for app in $apps
         set -l bundle_id (mdls -name kMDItemCFBundleIdentifier -r $app)
 
         if test -z $bundle_id
-            echo >&2 'Error getting bundle ID for "'$app'"'
+            set -q _flag_quiet
+            or echo >&2 'Error getting bundle ID for "'$app'"'
         else
-            echo $app: $bundle_id
+            if set -q _flag_short
+                echo $bundle_id
+            else
+                echo $app: $bundle_id
+            end
         end
     end
 end

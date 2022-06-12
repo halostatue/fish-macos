@@ -156,10 +156,6 @@ View a manpage in Preview.app.
 
 Add a note to Notes.app.
 
-### pdfmerge
-
-Merge one or more PDFs.
-
 ### ql
 
 QuickLook a file from the command-line.

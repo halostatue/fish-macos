@@ -2,7 +2,7 @@ function __macos_airport -a cmd
     set -e argv[1]
 
     switch $cmd
-        case scan
+        case scan ''
             __macos_airport_run -s
         case ssid
             __macos_airport_ssid

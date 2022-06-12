@@ -1,7 +1,7 @@
 function app -a cmd --description 'Operate on macOS applications'
     argparse -s h/help -- $argv
 
-    if set -q _flag_help
+    if set --query _flag_help
         echo 'Usage: '(status function)' --help
        app find --help | [options] pattern...
        app bundleid --help | [options] pattern...

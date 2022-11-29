@@ -5,9 +5,9 @@ function remind -d 'Add a reminder to Reminders.app'
     has:app Reminders
     or return 1
 
-    set -l text
+    set --local text
 
-    if set -q argv
+    if set --query argv
         set text $argv
     else
         set text (cat - | sed -e 's/$/<br>/')

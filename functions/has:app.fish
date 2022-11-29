@@ -3,7 +3,7 @@ function has:app -d 'Returns true if the named application exists'
     argparse a/all q/quiet -- $argv
     or return 1
 
-    if not set -q argv[1]
+    if not set --query argv[1]
         echo >&2 Usage: (status function) APPNAME...
         return 1
     end

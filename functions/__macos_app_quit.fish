@@ -1,14 +1,14 @@
 function __macos_app_quit
-    argparse -n 'app quit' x/exact r/restart h/help -- $argv
+    argparse --name 'app quit' x/exact r/restart h/help -- $argv
     or return 1
 
-    if set -q _flag_help
+    if set --query _flag_help
         echo 'Usage: app quit [options] pattern...
 
 Quits apps identified by the provided pattern or patterns (see
 `app find` for how applications are found).
 
-Options
+Options:
   -x, --exact             Quits only applications with exact matches
   -r, --restart           Restarts the application that was quit
   -h, --help              Show this help'
@@ -21,9 +21,9 @@ Options
         return 1
     end
 
-    set -l apps
+    set --local apps
 
-    if set -q _flag_exact
+    if set --query _flag_exact
         set apps (__macos_app_find --exact $argv)
         or return 1
     else
@@ -34,7 +34,7 @@ Options
     for app in $apps
         printf 'quit app "%s"' $app | osascript >/dev/null
 
-        if set -q _flag_restart
+        if set --query _flag_restart
             sleep 2
             open -a $app
         end

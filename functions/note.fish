@@ -5,9 +5,9 @@ function note -d 'Add a note to Notes.app'
     has:app Notes
     or return 1
 
-    set -l text
+    set --local text
 
-    if set -q argv
+    if set --query argv
         set text $argv
     else
         set text (cat - | sed -e 's/$/<br>/')
@@ -16,13 +16,13 @@ function note -d 'Add a note to Notes.app'
     test -z $text
     or return 1
 
-    set -l head $text[1]
-    set -q text[2]
-    and set -l body $text[2..-1]
+    set --local head $text[1]
+    set --query text[2]
+    and set --local body $text[2..-1]
 
-    set -q body
-    and set -l properties '{name: "'$head'", body: "'($body[1..-1])'"}'
-    or set -l properties '{name: "'$head'"}'
+    set --query body
+    and set --local properties '{name: "'$head'", body: "'($body[1..-1])'"}'
+    or set --local properties '{name: "'$head'"}'
 
     echo 'tell application "Notes"
   tell account "iCloud"

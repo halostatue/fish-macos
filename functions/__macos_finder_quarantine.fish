@@ -1,11 +1,30 @@
 function __macos_finder_quarantine -a verb
-    if set -q verb
+    argparse --name 'finder quarantine' h/help -- $argv
+    or return 1
+
+    if set --query _flag_help
+        echo 'Usage: finder [options] [SUBCOMMAND] [FILE...]
+
+Manage quarantine events.
+
+Subcommands:
+  [show]          Shows quarantine events by agent and URL.
+  clean FILE...   Removes quarantine attributes from the specified file(s).
+                  At least one file is required.
+  clear           Clears all quarantine events.
+
+Options:
+  -h, --help              Show this help'
+        return 0
+    end
+
+    if set --query verb
         set verb (string lower $verb)
     else
         set verb show
     end
 
-    set -e argv[1]
+    set --erase argv[1]
 
     switch $verb
         case show
@@ -17,7 +36,7 @@ SELECT LSQuarantineAgentName, LSQuarantineDataURLString
         case clear
             __macos_finder_quarantine_run 'DELETE FROM LSQuarantineEvent;'
         case clean
-            if not set -q argv[1]
+            if not set --query argv[1]
                 echo >&2 'finder quarantine clean requires at least one file parameter'
                 return 1
             end

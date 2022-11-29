@@ -1,12 +1,24 @@
 function __macos_finder_track
-    switch $argv[1]
-        case enable
-            functions -q finder:::track
-            or function finder:::track --on-variable PWD
-                __macos_finder_pwd_update
-            end
-            __macos_finder_pwd_update
-        case disable
-            functions -e finder:::track
+    argparse --name 'finder track' h/help -- $argv
+    or return 1
+
+    if set --query _flag_help
+        echo 'Usage: finder track [options]
+
+Makes the first Finder window track with the shell PWD. This should be used
+in a single shell instance only, and updates only when the PWD value is
+updated.
+
+Options:
+  -h, --help              Show this help'
+        return 0
     end
+
+    if not functions -q __macos_finder_tracking
+        function __macos_finder_tracking --on-variable PWD
+            __macos_finder_pwd_update
+        end
+    end
+
+    __macos_finder_pwd_update
 end

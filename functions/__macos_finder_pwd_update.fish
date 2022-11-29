@@ -1,17 +1,24 @@
 function __macos_finder_pwd_update
-    set -l window_count 1
-    set -l view ''
-    set -l view_type none
-    set -q argv[1]; and set -l view_type (string lower $argv[1])
+    argparse column list icon --exclusive column,list,icon -- $argv
+    or return 1
 
-    switch $view_type
-        case list icon column
-            set -q argv[2]; and set window_count $argv[2]
+    set --local window_count 1
+    set --local view ''
+    set --local view_type ''
 
-            set view 'set the current view of the front Finder window to '$view_type' view'
-        case '*'
-            set -q argv[1]; and set window_count $argv[1]
+    if set --query _finder_column
+        set view_type column
+    else if set --query _finder_list
+        set view_type list
+    else if set --query _finder_icon
+        set view_type icon
     end
+
+    if test $view_type != ''
+        set view 'set the current view of the front Finder window to '$view_type' view'
+    end
+
+    set --query argv[1]; and set window_count $argv[1]
 
     echo 'tell application "Finder"
   if ('$window_count' <= (count Finder windows)) then

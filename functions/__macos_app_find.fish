@@ -1,8 +1,8 @@
 function __macos_app_find
-    argparse -n 'app find' x/exact a/all q/quiet h/help -- $argv
+    argparse --name 'app find' x/exact a/all q/quiet h/help -- $argv
     or return 1
 
-    if set -q _flag_help
+    if set --query _flag_help
         echo 'Usage: app find [options] pattern...
 
 Shows installed apps by the provided pattern or patterns. Searches for
@@ -10,14 +10,13 @@ apps in /Applications, /Applications/Setapp, /Applications/Utilities,
 ~/Applications, /Appliciations/Xcode.app/Contents/Applications,
 /Developer/Applications, and /System/Applications.
 
-Options
+Options:
   -x, --exact             Perform exact matches only
   -a, --all               Show all matches
   -q, --quiet             Do not print matches
   -h, --help              Show this help
 
-Examples
-
+Examples:
   > app find -a 1password
   /Applications/1Password for Safari.app
   /Applications/1Password.app
@@ -33,8 +32,8 @@ Examples
         return 1
     end
 
-    set -l a Applications
-    set -l paths \
+    set --local a Applications
+    set --local paths \
         /$a \
         ~/$a \
         /$a/Setapp \
@@ -43,15 +42,15 @@ Examples
         /Developer/Applications \
         /System/Applications
 
-    set -l found 0
+    set --local found 0
 
     for pattern in $argv
         set pattern (string replace '\.app/?$' '' $pattern)
-        set -l apps {$paths}/*.app {$paths}/*.localized/*.app
+        set --local apps {$paths}/*.app {$paths}/*.localized/*.app
         for candidate in $apps
-            set -l found_item 0
+            set --local found_item 0
 
-            if set -q _flag_exact
+            if set --query _flag_exact
                 if string match -i -e -q /$pattern.app $candidate
                     set found_item 1
                 end
@@ -60,15 +59,15 @@ Examples
             end
 
             if test $found_item -eq 1
-                set -q _flag_quiet
+                set --query _flag_quiet
                 or echo $candidate
 
                 set found (math $found + $found_item)
 
-                set -q _flag_quiet
+                set --query _flag_quiet
                 and return 0
 
-                set -q _flag_all
+                set --query _flag_all
                 or return 0
             end
 
@@ -78,7 +77,7 @@ Examples
     test $found -gt 0
     and return 0
 
-    set -q _flag_quiet
+    set --query _flag_quiet
     or echo >&2 'No applications found.'
     return 1
 end

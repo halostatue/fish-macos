@@ -7,19 +7,44 @@
 # - Updated by Austin Ziegler 2022 to not actually care what the OS version is (and translated to fish). The only
 #   restriction is that you must have opened Mail.app at least once on any OS upgrade so that if any version changes
 #   have happened, Mail.app has taken care of that for you.
-function __macos_mail
-    set -l subcommand $argv[1]
-    set -e argv[1]
+function __macos_mac_mail
+    argparse --name 'mac mail' h/help -- $argv
+    or return 1
+
+    if set --query _flag_help
+        echo 'Usage: mac mail [options] SUBCOMMAND [arg]
+
+Performs operations on Mail.app configuration and database.
+
+Before running vaccuum after any OS upgrade, Mail.app must have been opened
+at least once so that the database and index formats have been updated.
+
+Subcommands:
+  vacuum                Vacuums the envelope index to improve performance.
+  attachments inline    Sets Mail.app attachment handling to inline.
+  attachments icon      Sets Mail.app attachment handling to icon.
+
+Options:
+  -h, --help               Show this help'
+        return 0
+    end
+
+    set --local subcommand $argv[1]
+    set --erase argv[1]
 
     switch (string lower $subcommand)
         case vacuum
-            set -l mail_version (ls -l ~/Library/Mail | string match -a -e -r V\\d)
-            set -l mail_path ~/Library/Mail/$mail_version/MailData/Envelope\ Index
+            set --local mail_version (
+                path filter --type dir ~/Library/Mail/* |
+                    string basename |
+                    string match --all --entire --regex V\\d
+            )
+            set --local mail_path ~/Library/Mail/$mail_version/MailData/Envelope\ Index
 
             osascript -e 'tell application "Mail" to quit'
-            set -l before (ls -lnah $mail_path | awk '{ print $5; }')
+            set --local before (ls -lnah $mail_path | awk '{ print $5; }')
             /usr/bin/sqlite3 $mail_path vacuum
-            set -l after (ls -lnah $mail_path | awk '{ print $5; }')
+            set --local after (ls -lnah $mail_path | awk '{ print $5; }')
 
             osascript -e "display dialog (\"Mail index before: $before\" & return & \"Mail index after: $after\" & return)"
             osascript -e 'tell application "Mail" to activate'
@@ -33,7 +58,8 @@ function __macos_mail
             end
 
         case '*'
-            echo >&2 Unknown command "'$subcommand'".
+            echo >&2 'mac mail: Unknown command.'
+            __macos_mac_mail --help >&2
             return 1
     end
 end

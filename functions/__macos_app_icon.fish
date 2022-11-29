@@ -1,14 +1,14 @@
 function __macos_app_icon
-    argparse -n 'app quit' x/exact h/help 'o/output=' 'w/width=' -- $argv
+    argparse --name 'app quit' x/exact h/help 'o/output=' 'w/width=' -- $argv
     or return 1
 
-    if set -q _flag_help
+    if set --query _flag_help
         echo 'Usage: app icon [options] pattern...
 
 Extracts macOS app icons as PNG (see `app find` for how applications
 are found).
 
-Options
+Options:
   -x, --exact             Perform exact matches only
   -oOUTPUT                Output to the file or directory specified
   --output OUTPUT         Output to the file or directory specified
@@ -25,9 +25,9 @@ Options
     end
 
 
-    set -l apps
+    set --local apps
 
-    if set -q _flag_exact
+    if set --query _flag_exact
         set apps (__macos_app_find --exact $argv)
         or return 1
     else
@@ -35,9 +35,9 @@ Options
         or return 1
     end
 
-    set -l app_count (count $apps)
+    set --local app_count (count $apps)
 
-    set -l output_path $PWD
+    set --local output_path $PWD
     if not test -z $_flag_output
         if test -e $_flag_output
             if test -f $_flag_output
@@ -61,17 +61,17 @@ Options
     end
 
     for app in $apps
-        set -l icon $app/Contents/Resources/(
+        set --local icon $app/Contents/Resources/(
             defaults read $app/Contents/Info CFBundleIconFile |
             string replace -r '\.icns$' ''
         ).icns
 
-        set -l name (basename $app .app)_icon.png
-        set -l tmp $TMPDIR/$name
-        set -l max_width (sips -g pixelWidth $icon | tail -1 | awk '{ print $2; }')
+        set --local name (basename $app .app)_icon.png
+        set --local tmp $TMPDIR/$name
+        set --local max_width (sips -g pixelWidth $icon | tail -1 | awk '{ print $2; }')
 
-        set -l outfile
-        set -l width
+        set --local outfile
+        set --local width
 
         if test -z $output_file
             set outfile $output_path/$name

@@ -5,6 +5,13 @@ Copyright © 2019–2022 Austin Ziegler
 Some functions derived from oh-my-fish/plugin-osx, copyright 2014 Brun
 Ferreira Pinto.
 
+`mac mail` function shared originally on the Hawk Wings blog Romulo based on
+a script by "pmbuko". It was subsequently updated by Brett Terpstra in 2012,
+Mathias Törnblom in 2015, and Andrei Miclaus in 2017.
+
+From version 5.0, `manp` is based on man2pdf.sh created by Pico Mitchell (of
+Random Applications) on 11/16/22, licensed under the MIT license.
+
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the \"Software\"), to deal
 in the Software without restriction, including without limitation the rights

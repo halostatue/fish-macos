@@ -1,4 +1,4 @@
-function __macos_version
+function __macos_mac_version
     argparse \
         --exclusive s,v \
         --exclusive l,v \
@@ -12,7 +12,7 @@ function __macos_version
 
 Shows the current mac version.
 
-Options
+Options:
     -s, --simple          Removes spaces from the version displayed
     -l, --lowercase       Converts the version to all lowercase
     -c, --comparable      Outputs the comparable version value
@@ -31,7 +31,7 @@ Options
 
     if set --query _flag_comparable
         echo $os_version
-        return
+        return 0
     end
 
     switch $os_version

@@ -1,5 +1,35 @@
 # fish-macos Changelog
 
+## 5.0 / 2022-MM-DD
+
+- Changed `manp` to be compatible with macOS Ventura and prefer not using an
+  external package (Ghostscript). The solution was adapted from [man2pdf.sh][]
+  by [Pico Mitchell][], originally found via Rob Griffiths’s [blog][] and Armin
+  Briegel's [Scripting OS X][].
+
+- Added `app frontmost` to show the app with the current top window.
+
+- Removed features no longer supported under macOS Ventura:
+
+  - `mac airport history` (the matching plist is empty)
+
+  - `mac lock-screen` (the underlying binary is missing)
+
+- Removed `trash`. There are better tools than this function, such as:
+
+  - [trash][], a small command-line program that moves files or folders to the
+    trash.
+
+  - [rmtrash][] is a small utility that will move the file to OS X's Trash
+    rather than obliterating the file (as rm does).
+
+  - [macos-trash][] is a small command-line program that moves files or folders
+    to the trash, written in Swift
+
+- Improved completion scripts and overall consistency.
+
+- Added several governance documents, adopting a code of conduct.
+
 ## 4.0 / 2022-06-11
 
 - Extracted the various sub-functions only loaded when `app` is run (and `mac`
@@ -78,4 +108,11 @@
 
 - Initial version
 
+[blog]: https://robservatory.com/open-postscript-files-in-preview-in-macos-ventura/
+[macos-trash]: https://github.com/sindresorhus/macos-trash
+[man2pdf.sh]: https://gist.github.com/PicoMitchell/619c12fd6a53ae6ec657514915d4edf9
 [oh-my-fish/plugin-osx]: https://github.com/oh-my-fish/plugin-osx
+[pico mitchell]: https://github.com/PicoMitchell
+[rmtrash]: http://www.nightproductions.net/cli.htm
+[scripting os x]: https://scriptingosx.com/2022/11/on-viewing-man-pages-ventura-update/
+[trash]: https://github.com/ali-rantakari/trash

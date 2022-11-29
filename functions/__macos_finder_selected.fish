@@ -1,4 +1,17 @@
 function __macos_finder_selected
+    argparse --name 'finder selected' h/help -- $argv
+    or return 1
+
+    if set --query _flag_help
+        echo 'Usage: finder selected [options] [window#]
+
+Print the selected files on the command-line.
+
+Options:
+  -h, --help              Show this help'
+        return 0
+    end
+
     echo '
   tell application "Finder" to set theSelection to selection
   set output to ""

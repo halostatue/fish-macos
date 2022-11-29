@@ -9,7 +9,7 @@ Useful functions for macOS using [fish shell][fish].
 Install with [Fisher][fisher] (recommended):
 
 ```fish
-fisher install halostatue/fish-macos@v4.x
+fisher install halostatue/fish-macos@v5.x
 ```
 
 <details>
@@ -24,95 +24,201 @@ directory structure.
 
 ### System Requirements
 
-- [fish][fish] 3.0+
+- [fish][] 3.0+
+- [fisher][] 4.0+
+
+Compatibility with macOS versions is maintained on a rolling basis. When
+possible, _backwards_ compatibility will be maintained as long as the
+functionality is _possible_ in later versions of macOS. Functions and
+subcommands may be removed if they are no longer supported on the latest
+versions of macOS. This will always trigger a major version release.
 
 ## Functions
 
-### app
+### `app`
 
 Utilities for working with MacOS apps. Has the following subcommands:
 
-- `bundle`: Get the bundle ID for the application.
-- `find`: Finds the full application path.
-- `icon`: Obtains the application icon as a PNG.
-- `quit`: Quits the named application.
+#### `app bundleid`
 
-### finder
+Shows the bundle identifier for each of the applications found for the pattern
+(see `app find` for how applications are found).
 
-Operates with the Finder from the current shell.
+##### Options
 
-#### finder track
+- `-x`, `--exact`: Perform exact matches only
+- `-a`, `--all`: Show all matches
+- `-q`, `--quiet`: Suppress error output
+- `-s`, `--short`: Prints out the bundle IDs only
 
-Turn on Finder/path tracking. The frontmost Finder window will be updated
-when the current path changes in the current shell.
+##### Examples
 
-#### finder untrack
+```console
+$ app bundleid 1password
+/Applications/1Password for Safari.app: com.1password.safari
+/Applications/1Password.app: com.1password.1password
 
-Turn off Finder/path tracking.
+$ app bundleid -x 1password
+/Applications/1Password.app: com.1password.1password
+```
 
-#### finder pwd
+#### `app find`
 
-Print the current path of the frontmost Finder window. Accepts an integer
-parameter specifying the Finder window depth to use (the frontmost window is
-`1`).
+Shows installed apps by the provided pattern or patterns. Searches for apps in
+`/Applications`, `/Applications/Setapp`, `/Applications/Utilities`,
+`~/Applications`, `/Appliciations/Xcode.app/Contents/Applications`,
+`/Developer/Applications`, and `/System/Applications`.
 
-#### finder cd
+##### Options
 
-Changes the current path to that of the frontmost Finder window.
-Accepts an integer parameter specifying the finder window depth to use (the
-frontmost window is `1`).
+- `-x`, `--exact`: Perform exact matches only
+- `-a`, `--all`: Show all matches
+- `-q`, `--quiet`: Do not print matches
 
-#### finder pushd
+##### Examples
 
-Changes the current path with pushd to that of the frontmost
-Finder window. Accepts an integer parameter specifying the finder window
-depth to use (the frontmost window is `1`).
+```console
+$ app find -a 1password
+/Applications/1Password for Safari.app
+/Applications/1Password.app
 
-#### finder {update, list, icon, column}
+$ app find -x 1password
+/Applications/1Password.app'
+```
 
-Changes the Finder window to PWD. If `list`, `icon`, or `column` are used,
-uses the list, icon, or column view.
+#### `app frontmost`
 
-#### finder clean
+Shows the front-most application.
 
-Cleans the specified path and subdirectories of `.DS_Store` files.
+##### Options
 
-#### finder hidden
+- `-b`, `--bundle-id`: Shows the app bundle ID
+- `-p`, `--path`: Shows the app path
+- `-n`, `--name`: Shows the app name
+- `-P`, `--pid`: Shows the PID of the app
+- `-a`, `--all`: Shows all details
+
+##### Examples
+
+```console
+$ app frontmost
+iTerm2'
+```
+
+#### `app icon`
+
+Extracts macOS app icons as PNG (see `app find` for how applications
+are found).
+
+##### Options
+
+- `-x`, `--exact`: Perform exact matches only
+- `-oOUTPUT`: Output to the file or directory specified
+- `--output OUTPUT`: Output to the file or directory specified
+- `-wWIDTH`: Outputs to a maximum of WIDTH pixels
+- `--width WIDTH`: Outputs to a maximum of WIDTH pixels
+
+#### `app quit`
+
+Quits apps identified by the provided pattern or patterns (see `app find` for
+how applications are found).
+
+##### Options
+
+- `-x`, `--exact`: Quits only applications with exact matches
+- `-r`, `--restart`: Restarts the application that was quit
+
+### `finder`
+
+Interacts with the Finder. If a window number parameter is accepted in
+a command, the first (front-most) window is number `1`. If a lower window is
+specified, or no window is specified, that window becomes the first window.
+
+#### `finder track`
+
+Makes the first Finder window track with the shell `$PWD`. This should be used
+in a single shell instance only, and updates only when the `$PWD` value is
+updated.
+
+#### `finder untrack`
+
+Disables Finder directory tracking.
+
+#### `finder cd [window#]`
+
+Changes the current path to that of the Finder window.
+
+#### `finder pushd [window#]`
+
+Changes the current path with `pushd` to that of the Finder window.
+
+#### `finder pwd [window#]`
+
+Print the current path of the Finder window.
+
+#### `finder column [window#]`
+
+Changes the Finder window to the current working directory (`$PWD`) using the
+`column` view.
+
+#### `finder icon [window#]`
+
+Changes the Finder window to the current working directory (`$PWD`) using the
+`icon` view.
+
+#### `finder list [window#]`
+
+Changes the Finder window to the current working directory (`$PWD`) using the
+`list` view.
+
+#### `finder update [window#]`
+
+Changes the Finder window to the current working directory (`$PWD`) using the
+current view.
+
+#### `finder clean [path...]`
+
+Removes `.DS_Store` files from the paths provided, or the current path if one is
+not provided.
+
+#### `finder hidden [off|on|toggle]`
 
 Shows or hides hidden files in Finder. Accepts a parameter `on` (show the
-files), `off` (hide the files), or `toggle`. If no parameter is given,
-shows the current state.
+files), `off` (hide the files), or `toggle`. If no parameter is given, shows the
+current state.
 
-#### finder selected
+#### `finder selected`
 
-Prints a list of selected folders and files from Finder. Also
-available as command `pfs`.
+Prints a list of selected folders and files from Finder.
 
-#### finder quarantine
+#### `finder quarantine [show]`
 
-Show or clear quarantine events and attributes. Supports the following
-subcommands:
+Shows quarantine events from quarantine databases.
 
-- `show`: Shows quarantine events from quarantine databases.
-- `clear`: Clears quarantine events from quarantine databases.
-- `clean`: Cleans the named file(s) of quarantine extended attributes.
+#### `finder quarantine clear`
 
-#### finder desktop-icons
+Clears quarantine events from quarantine databases.
 
-Shows or hides the desktop icons. Accepts a parameter `on` (show the
-files), `off` (hide the files), or `toggle`. If no parameter is given,
-shows the current state.
+#### `finder quarantine clean FILE...`
 
-### has:app
+Cleans the named file(s) of quarantine extended attributes.
+
+#### `finder desktop-icons [off|on|toggle]`
+
+Shows or hides the desktop icons. Accepts a parameter `on` (show the files),
+`off` (hide the files), or `toggle`. If no parameter is given, shows the current
+state.
+
+### `has:app`
 
 Returns true if one or more of the named MacOS application exists. This is a
-specialized wrapper around `app find`.
+specialized wrapper around `app find` that always looks for exact matches.
 
-### mac
+### `mac`
 
 Manage various aspects of the modern MacOS interface.
 
-#### mac airdrop
+#### `mac airdrop`
 
 Works with the Mac AirDrop configurations. Has the following subcommands:
 
@@ -150,7 +256,12 @@ Set or show the Mac audio volume.
 
 ### manp
 
-View a manpage in Preview.app.
+View a man page as a PDF via `Preview.app`. PDFs will be cached in
+`/private/tmp/man PDFs` by default, but this can be overridden with the
+universal variable `$manp_cache_path`. It will be opened with the default PDF
+application by default unless `$manp_pdf_app_name` is set.
+
+The cache can be cleared with `--clear-cache`.
 
 ### note
 
@@ -158,7 +269,7 @@ Add a note to Notes.app.
 
 ### ql
 
-QuickLook a file from the command-line.
+Quick Look a file from the command-line.
 
 ### remind
 

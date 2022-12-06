@@ -19,6 +19,7 @@ Options:
   -h, --help              Show this help'
         return 0
     end
+
     switch $state
         case status ''
             set --local value (__macos_mac_defaults_query com.apple.universalaccess reduceTransparency)

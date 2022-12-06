@@ -20,7 +20,6 @@ Options:
 Example:
   > app frontmost
   iTerm2'
-
         return 0
     end
 

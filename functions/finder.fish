@@ -28,6 +28,7 @@ Subcommands:
 
 Options:
   -h, --help               Show this help'
+        return 0
     end
 
     if set --query verb

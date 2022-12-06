@@ -17,6 +17,7 @@ Options:
     -l, --lowercase       Converts the version to all lowercase
     -c, --comparable      Outputs the comparable version value
     -v, --version         Outputs the macOS version (same as sw_vers -productVersion)'
+        return 0
     end
 
     set --local os_version (sw_vers -productVersion)

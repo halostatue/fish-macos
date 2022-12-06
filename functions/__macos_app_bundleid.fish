@@ -22,6 +22,7 @@ Examples:
 
   > app bundleid -x 1password
   /Applications/1Password.app: com.1password.1password'
+        return 0
     end
 
     if test (count $argv) -eq 0

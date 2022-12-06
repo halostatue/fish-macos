@@ -16,6 +16,7 @@ States:
 
 Options:
   -h, --help               Show this help'
+        return 0
     end
 
     switch (string lower $subcommand)

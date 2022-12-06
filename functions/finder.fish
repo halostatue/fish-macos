@@ -1,6 +1,6 @@
 # Based on bashfinder: https://github.com/NapoleonWils0n/bashfinder.git
 # and my port to zsh.
-function finder -a cmd -d 'Manipulate the finder with the current shell'
+function finder -d 'Manipulate the finder with the current shell'
     argparse --stop-nonopt h/help -- $argv
 
     if set --query _flag_help
@@ -31,11 +31,7 @@ Options:
         return 0
     end
 
-    if set --query verb
-        set verb (string lower $verb)
-    else
-        set verb none
-    end
+    set --local verb (string lower -- $argv[1])
     set --erase argv[1]
 
     switch $verb
@@ -72,6 +68,7 @@ Options:
             finder --help >&2
             return 1
         case '*'
+            echo $verb
             echo >&2 'finder: Unknown command.'
             finder --help >&2
             return 1

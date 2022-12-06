@@ -69,11 +69,11 @@ Options:
     end
 
     if set --query _flag_simple
-        set os_version (string replace -a ' ' '' "$os_version")
+        set os_version (string replace --all ' ' '' "$os_version")
     end
 
     if set --query _flag_lowercase
-        set os_version (string lower "$os_version")
+        set os_version (string lower -- "$os_version")
     end
 
     echo $os_version

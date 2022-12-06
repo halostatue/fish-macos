@@ -29,28 +29,29 @@ Options:
         return 0
     end
 
-    set --local subcommand $argv[1]
+    set --local subcommand (string lower -- $argv[1])
     set --erase argv[1]
 
-    switch (string lower $subcommand)
+    switch $subcommand
         case vacuum
             set --local mail_version (
                 path filter --type dir ~/Library/Mail/* |
-                    string basename |
+                    path basename |
                     string match --all --entire --regex V\\d
             )
             set --local mail_path ~/Library/Mail/$mail_version/MailData/Envelope\ Index
 
             osascript -e 'tell application "Mail" to quit'
+
             set --local before (ls -lnah $mail_path | awk '{ print $5; }')
             /usr/bin/sqlite3 $mail_path vacuum
             set --local after (ls -lnah $mail_path | awk '{ print $5; }')
 
-            osascript -e "display dialog (\"Mail index before: $before\" & return & \"Mail index after: $after\" & return)"
+            printf "Mail index before: %s\nMail index after: %s\n" $before $after
             osascript -e 'tell application "Mail" to activate'
 
         case attachments
-            switch (string lower $argv1)
+            switch (string lower -- $argv[1])
                 case inline
                     defaults delete com.apple.mail DisableInlineAttachmentViewing
                 case icon

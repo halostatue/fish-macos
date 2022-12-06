@@ -1,4 +1,4 @@
-function __macos_mac_vol -a action
+function __macos_mac_vol
     argparse --name 'mac vol' h/help -- $argv
     or return 1
 
@@ -18,7 +18,10 @@ Options:
         return 0
     end
 
-    switch (string lower $action)
+    set --local action (string lower -- $argv[1])
+    set --erase argv[1]
+
+    switch $action
         case mute
             osascript -e 'set volume output muted true'
         case unmute
@@ -26,7 +29,12 @@ Options:
         case (seq 0 100)
             osascript -e "set volume output volume "$action
         case show ''
-            osascript -e "output volume of (get volume settings)"
+            if test (osascript -e 'output muted of (get volume settings)') = true
+                echo muted
+            else
+                osascript -e "output volume of (get volume settings)"
+            end
+
         case '*'
             echo >&2 'mac vol: Unknown level'
             __macos_mac_vol --help >&2

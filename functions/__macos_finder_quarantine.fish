@@ -1,4 +1,4 @@
-function __macos_finder_quarantine -a verb
+function __macos_finder_quarantine
     argparse --name 'finder quarantine' h/help -- $argv
     or return 1
 
@@ -18,16 +18,11 @@ Options:
         return 0
     end
 
-    if set --query verb
-        set verb (string lower $verb)
-    else
-        set verb show
-    end
-
+    set --local verb (string lower -- $argv[1])
     set --erase argv[1]
 
     switch $verb
-        case show
+        case show ''
             __macos_finder_quarantine_run "
 SELECT LSQuarantineAgentName, LSQuarantineDataURLString
   FROM LSQuarantineEvent

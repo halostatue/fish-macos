@@ -1,4 +1,4 @@
-function __macos_mac_airdrop -a subcommand
+function __macos_mac_airdrop
     argparse --name 'mac airdrop' h/help -- $argv
     or return 1
 
@@ -19,7 +19,10 @@ Options:
         return 0
     end
 
-    switch (string lower $subcommand)
+    set --local subcommand (string lower -- $argv[1])
+    set --erase argv[1]
+
+    switch $subcommand
         case on
             sudo ifconfig awdl0 up
         case off

@@ -1,4 +1,4 @@
-function __macos_mac_proxy_icon -a state
+function __macos_mac_proxy_icon
     argparse --name 'mac proxy-icon' h/help q/query -- $argv
     or return 1
 
@@ -21,12 +21,17 @@ Options:
         return 0
     end
 
-    switch (string lower $state)
+    set --local state (string lower -- $argv[1])
+    set --erase argv[1]
+
+    switch $state
         case status ''
             set --local value (__macos_mac_defaults_query -g NSToolbarTitleViewRolloverDelay 0.5)
 
             if set --query _flag_query
                 test $value -eq 0
+            else if test $value -eq 0
+                printf "immediate (0 seconds)\n"
             else
                 printf "%0.2f seconds\n" $value
             end

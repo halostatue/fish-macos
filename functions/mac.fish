@@ -1,4 +1,4 @@
-function mac -a subcommand -d 'Manage several macOS functions'
+function mac -d 'Manage several macOS functions'
     argparse --stop-nonopt h/help -- $argv
 
     if set --query _flag_help
@@ -23,9 +23,10 @@ Options:
         return 0
     end
 
+    set --local subcommand (string lower -- $argv[1])
     set --erase argv[1]
 
-    switch (string lower $subcommand)
+    switch $subcommand
         case airdrop
             __macos_mac_airdrop $argv
         case airport

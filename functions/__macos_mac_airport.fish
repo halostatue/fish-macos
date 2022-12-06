@@ -1,4 +1,4 @@
-function __macos_mac_airport -a cmd
+function __macos_mac_airport
     argparse --name 'mac airport' h/help -- $argv
     or return 1
 
@@ -26,9 +26,10 @@ Options:
         return 0
     end
 
+    set --local cmd (string lower -- $argv[1])
     set --erase argv[1]
 
-    switch (string lower -- $cmd)
+    switch $cmd
         case scan ''
             printf "Scanning...\r"
             __macos_mac_airport_run -s

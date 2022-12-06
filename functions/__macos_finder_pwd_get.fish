@@ -1,5 +1,9 @@
-function __macos_finder_pwd_get -a window
-    set --query window; or set window 1
+function __macos_finder_pwd_get
+    set --local window 1
+
+    if set --query argv[1]
+        set window 1
+    end
 
     echo 'tell application "Finder"
   if ('$window' <= (count Finder windows)) then

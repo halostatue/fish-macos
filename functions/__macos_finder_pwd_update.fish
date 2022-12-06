@@ -1,16 +1,16 @@
 function __macos_finder_pwd_update
-    argparse column list icon --exclusive column,list,icon -- $argv
+    argparse --exclusive column,list,icon column list icon -- $argv
     or return 1
 
     set --local window_count 1
     set --local view ''
     set --local view_type ''
 
-    if set --query _finder_column
+    if set --query _flag_column
         set view_type column
-    else if set --query _finder_list
+    else if set --query _flag_list
         set view_type list
-    else if set --query _finder_icon
+    else if set --query _flag_icon
         set view_type icon
     end
 

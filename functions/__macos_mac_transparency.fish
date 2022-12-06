@@ -1,4 +1,4 @@
-function __macos_mac_transparency -a state
+function __macos_mac_transparency
     argparse --name 'mac transparency' h/help q/query -- $argv
     or return 1
 
@@ -20,9 +20,12 @@ Options:
         return 0
     end
 
+    set --local state (string lower -- $argv[1])
+    set --erase argv[1]
+
     switch $state
         case status ''
-            set --local value (__macos_mac_defaults_query com.apple.universalaccess reduceTransparency)
+            set --local value (__macos_mac_defaults_query com.apple.universalaccess reduceTransparency 0)
 
             if set --query _flag_query
                 test $value -eq 0
@@ -35,13 +38,12 @@ Options:
             end
 
         case on
-            defaults write com.apple.universalaccess reduceTransparency -bool false
+            defaults delete com.apple.universalaccess reduceTransparency
 
         case off
             defaults write com.apple.universalaccess reduceTransparency -bool true
 
         case toggle
-
             if __macos_mac_transparency status --query
                 __macos_mac_transparency off
             else

@@ -19,24 +19,22 @@ Options:
         return 0
     end
 
-    set --local action $status
+    set --local action (string lower -- $argv[1])
     set --local key AppleShowAllFiles
-    set --query argv[1]
-    and set action (string lower $argv[1])
 
     switch $action
         case off
-            __macos_finder_defaults_set $key true
-        case on
             __macos_finder_defaults_set $key false
+        case on
+            __macos_finder_defaults_set $key true
         case toggle
-            if __macos_finder_defaults_query $key
+            if test (__macos_mac_defaults_query com.apple.Finder $key 0) -eq 1
                 __macos_finder_defaults_set $key false
             else
                 __macos_finder_defaults_set $key true
             end
-        case status
-            if __macos_finder_defaults_query $key
+        case status ''
+            if test (__macos_mac_defaults_query com.apple.Finder $key 0) -eq 1
                 echo 'Hidden files are visible in finder.'
             else
                 echo 'Hidden files are hidden in finder.'

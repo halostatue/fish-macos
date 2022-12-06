@@ -18,15 +18,15 @@ Options:
         return 0
     end
 
-    set --local state (string lower $argv[1])
+    set --local state (string lower -- $argv[1])
     set --erase argv[1]
 
     switch $state
         case on
             if test (count $argv) -eq 0
-                defaults write -g CGFontRenderingFontSmoothingDisabled -bool true
+                defaults delete -g CGFontRenderingFontSmoothingDisabled
             else
-                for app in (__macos_app_bundleid -x -s -a $argv)
+                for app in (__macos_app_bundleid --exact --short --all $argv)
                     defaults delete $app CGFontRenderingFontSmoothingDisabled
 
                     if test $app = com.microsoft.VSCode
@@ -41,7 +41,7 @@ Options:
             if test (count $argv) -eq 0
                 defaults write -g CGFontRenderingFontSmoothingDisabled -bool false
             else
-                for app in (__macos_app_bundleid -x -s -a $argv)
+                for app in (__macos_app_bundleid --exact --short --all $argv)
                     defaults write $app CGFontRenderingFontSmoothingDisabled -bool false
 
                     if test $app = com.microsoft.VSCode

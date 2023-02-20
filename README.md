@@ -209,10 +209,13 @@ Shows or hides the desktop icons. Accepts a parameter `on` (show the files),
 `off` (hide the files), or `toggle`. If no parameter is given, shows the current
 state.
 
-### `has:app`
+### `has_app` (previously `has:app`)
 
 Returns true if one or more of the named MacOS application exists. This is a
 specialized wrapper around `app find` that always looks for exact matches.
+
+This was called `has:app`, but has been renamed `has_app`. The previous versions
+will be removed at version 6.
 
 ### `mac`
 
@@ -226,7 +229,7 @@ Works with the Mac AirDrop configurations. Has the following subcommands:
 - `off`: Turns AirDrop off.
 - `status`: Reports the status of AirDrop.
 
-#### mac airport
+#### `mac airport`
 
 Work with Mac AirPort configurations. Has the following subcommands:
 
@@ -238,23 +241,23 @@ Work with Mac AirPort configurations. Has the following subcommands:
 - `password`: Recovers the current AirPort network password, or the password for
   a specified SSID.
 
-#### mac flushdns
+#### `mac flushdns`
 
 Flush the MacOS DNS cache.
 
-#### mac lock-screen
+#### `mac lock-screen`
 
 Locks the screen.
 
-#### mac lsclean
+#### `mac lsclean`
 
 Clean LaunchServices to remove duplicate 'Open with...' entries.
 
-#### mac vol
+#### `mac vol`
 
 Set or show the Mac audio volume.
 
-### manp
+### `manp`
 
 View a man page as a PDF via `Preview.app`. PDFs will be cached in
 `/private/tmp/man PDFs` by default, but this can be overridden with the
@@ -263,21 +266,17 @@ application by default unless `$manp_pdf_app_name` is set.
 
 The cache can be cleared with `--clear-cache`.
 
-### note
+### `note`
 
 Add a note to Notes.app.
 
-### ql
+### `ql`
 
 Quick Look a file from the command-line.
 
-### remind
+### `remind`
 
 Add a note to Reminders.app.
-
-### trash
-
-Move one or more files into the Trash.
 
 ## Licence
 

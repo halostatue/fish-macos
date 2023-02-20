@@ -1,6 +1,12 @@
 # fish-macos Changelog
 
-## 5.0 / 2022-MM-DD
+## 5.1 / 2023-02-19
+
+- Deprecated `has:app` and replaced with `has_app`.
+
+- Added `mac touchid` to control Touch ID support for `sudo`.
+
+## 5.0 / 2022-12-05
 
 - Changed `manp` to be compatible with macOS Ventura and prefer not using an
   external package (Ghostscript). The solution was adapted from [man2pdf.sh][]

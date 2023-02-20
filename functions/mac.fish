@@ -14,6 +14,7 @@ Subcommands:
   lsclean         Cleans the LaunchServices registration list
   mail            Speed up Mail.app by vacuuming the envelope index
   proxy-icon      Enables or disables proxy icon delay
+  touchid         Manages Touch ID authorization for sudo
   transparency    Enables or disables interface transparency
   version         Shows the current macOS version
   vol             Controls the volume level
@@ -41,6 +42,8 @@ Options:
             __macos_mac_mail $argv
         case proxy-icon
             __macos_mac_proxy_icon $argv
+        case touchid
+            __macos_mac_touchid $argv
         case transparency
             __macos_mac_transparency $argv
         case vol

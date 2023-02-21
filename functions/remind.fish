@@ -2,7 +2,7 @@ function remind -d 'Add a reminder to Reminders.app'
     is:mac 'mountain lion'
     or return 1
 
-    has:app Reminders
+    has_app Reminders
     or return 1
 
     set --local text

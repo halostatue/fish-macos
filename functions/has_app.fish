@@ -1,5 +1,5 @@
 function has_app -d 'Returns true if the named application exists'
-    # Suppress these flags being passed to has:app.
+    # Suppress these flags being passed to __macos_app_find
     argparse a/all q/quiet -- $argv
     or return 1
 

@@ -1,5 +1,9 @@
 # fish-macos Changelog
 
+## 5.1.1 / 2023-02-21
+
+- Changed internal use of `has:app` to `has_app`.
+
 ## 5.1 / 2023-02-19
 
 - Deprecated `has:app` and replaced with `has_app`.

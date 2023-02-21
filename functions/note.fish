@@ -2,7 +2,7 @@ function note -d 'Add a note to Notes.app'
     is:mac 'mountain lion'
     or return 1
 
-    has:app Notes
+    has_app Notes
     or return 1
 
     set --local text

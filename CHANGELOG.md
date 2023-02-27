@@ -1,5 +1,15 @@
 # fish-macos Changelog
 
+## 5.1.2 / 2023-02-26
+
+- Fixed an error where MacPorts-installed `pam_reattach` was not being detected.
+
+- Added a warning on installing `pam_reattach` with MacPorts and that `sudo`
+  support must be disabled _before_ uninstalling `pam_reattach`. The
+  installation of `pam_reattach` with MacPorts is _discouraged_ for this reason,
+  but still supported. A warning will _always_ be printed when using MacPorts,
+  even if `--quiet` is specified.
+
 ## 5.1.1 / 2023-02-21
 
 - Changed internal use of `has:app` to `has_app`.

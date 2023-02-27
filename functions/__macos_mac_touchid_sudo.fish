@@ -8,7 +8,10 @@ function __macos_mac_touchid_sudo
 Enables or disables Touch ID support for sudo. Requires administrative
 permissions to edit /etc/pam.d/sudo and executes with sudo.
 
-If pam_reattach.so is installed, this will be managed as well.
+If pam_reattach is installed, this will be managed as well. Note that if
+pam_reattach is installed using sudo (such as with MacPorts), it is
+imperative that Touch ID support be disabled first or you may be in
+a situation where you cannot use sudo.
 
 States:
   off         Disables Touch ID.
@@ -25,7 +28,7 @@ Options:
     set --erase argv[1]
 
     set --local reattach ''
-    for d in /opt/homebrew /opt/homebrew /usr/local /usr
+    for d in /opt/homebrew /usr/local /usr /opt/local
         for f in $d/lib/pam/pam_reattach.so*
             if test -f $f
                 set reattach (string replace --all --regex / \\/ $f)
@@ -41,14 +44,23 @@ Options:
             if not grep -q pam_tid.so /etc/pam.d/sudo
                 if sudo sed -i '' -e '/# sudo: auth account password session/a\
 auth       sufficient     pam_tid.so' /etc/pam.d/sudo
-                    set --query _flag_quiet || printf "pam_tid:      enabled\n"
+                    set --query _flag_quiet || printf "%s\n" "pam_tid:      enabled"
                 end
             end
 
             if test -n $reattach && not grep -q pam_reattach /etc/pam.d/sudo
+
                 if sudo sed -i '' -e '/pam_tid\.so/i\
 auth       optional      '$reattach /etc/pam.d/sudo
-                    set --query _flag_quiet || printf "pam_reattach: enabled\n"
+                    set --query _flag_quiet || printf "%s\n" "pam_reattach: enabled"
+
+                    if string match --quiet --regex /opt/local $reattach && command --query port
+                        set --query _flag_quiet || printf "\n"
+                        printf >&2 "%s\n%s\n%s\n" \
+                            "WARNING: $reattach is installed with MacPorts." \
+                            "         Remember to disable Touch ID before uninstalling it or your" \
+                            "         system may be unusable until the next macOS update."
+                    end
                 end
             end
 
@@ -56,13 +68,13 @@ auth       optional      '$reattach /etc/pam.d/sudo
             osascript -e 'tell application "System Preferences" to quit'
             if grep -q pam_tid.so /etc/pam.d/sudo
                 if sudo sed -i '' -e /pam_tid.so/d /etc/pam.d/sudo
-                    set --query _flag_quiet || printf "pam_tid:      disabled\n"
+                    set --query _flag_quiet || printf "%s\n" "pam_tid:      disabled"
                 end
             end
 
             if grep -q pam_reattach.so /etc/pam.d/sudo
                 if sudo sed -i '' -e /pam_reattach.so/d /etc/pam.d/sudo
-                    set --query _flag_quiet || printf "pam_reattach: disabled\n"
+                    set --query _flag_quiet || printf "%s\n" "pam_reattach: disabled"
                 end
             end
 
@@ -76,7 +88,7 @@ auth       optional      '$reattach /etc/pam.d/sudo
             if set --query _flag_quiet
                 test $pam_tid = enabled
             else
-                printf "pam_tid:      %s\npam_reattach: %s\n" $pam_tid $pam_reattach
+                printf 'pam_tid:      %s\npam_reattach: %s\n' $pam_tid $pam_reattach
             end
 
         case toggle

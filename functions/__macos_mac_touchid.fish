@@ -1,5 +1,5 @@
 function __macos_mac_touchid
-    argparse --name 'mac touchid' h/help -- $argv
+    argparse --name 'mac touchid' h/help q/quiet -- $argv
     or return 1
 
     if set --query _flag_help
@@ -24,6 +24,10 @@ Options:
 
     set --local subsystem (string lower -- $argv[1])
     set --erase argv[1]
+
+    if set --query _flag_quiet
+        set --append argv --quiet
+    end
 
     switch $subsystem
         case sudo

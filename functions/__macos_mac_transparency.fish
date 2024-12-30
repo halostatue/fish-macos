@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_mac_transparency.fish
+
 function __macos_mac_transparency
     argparse --name 'mac transparency' h/help q/query -- $argv
     or return 1

@@ -1,5 +1,7 @@
+# @halostatue/fish-macos/functions/note.fish
+
 function note -d 'Add a note to Notes.app'
-    is:mac 'mountain lion'
+    is_mac 'mountain lion'
     or return 1
 
     has_app Notes

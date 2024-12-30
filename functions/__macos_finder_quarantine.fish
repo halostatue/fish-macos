@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_finder_quarantine.fish
+
 function __macos_finder_quarantine
     argparse --name 'finder quarantine' h/help -- $argv
     or return 1

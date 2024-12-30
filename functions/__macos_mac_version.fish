@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_mac_version.fish
+
 function __macos_mac_version
     argparse \
         --exclusive s,v \

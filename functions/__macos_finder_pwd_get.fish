@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_finder_pwd_get.fish
+
 function __macos_finder_pwd_get
     set --local window 1
 

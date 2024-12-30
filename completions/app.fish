@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/completions/app.fish
+
 complete --command app --erase
 
 complete --command app --arguments bundleid \

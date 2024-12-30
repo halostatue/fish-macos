@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/app.fish
+
 function app --description 'Operate on macOS applications'
     argparse --stop-nonopt h/help -- $argv
 

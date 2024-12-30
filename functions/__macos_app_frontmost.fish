@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_app_frontmost.fish
+
 function __macos_app_frontmost
     argparse --name 'app frontmost' \
         h/help b/bundle-id p/path n/name P/pid a/all \

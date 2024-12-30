@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_mac_touchid_sudo.fish
+
 function __macos_mac_touchid_sudo
     argparse --name 'mac touchid sudo' h/help q/quiet -- $argv
     or return 1

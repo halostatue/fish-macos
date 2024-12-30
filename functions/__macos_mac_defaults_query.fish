@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_mac_defaults_query.fish
+
 function __macos_mac_defaults_query
     if set --local value (defaults read $argv[1] $argv[2] 2>/dev/null)
         echo $value

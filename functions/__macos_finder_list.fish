@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_finder_list.fish
+
 function __macos_finder_list
     argparse --name 'finder list' h/help -- $argv
     or return 1

@@ -9,23 +9,13 @@ Useful functions for macOS using [fish shell][fish].
 Install with [Fisher][fisher] (recommended):
 
 ```fish
-fisher install halostatue/fish-macos@v5.x
+fisher install halostatue/fish-macos@v6
 ```
-
-<details>
-<summary>Not using a package manager?</summary>
-
----
-
-Copy `functions/*.fish` to your fish configuration directory preserving the
-directory structure.
-
-</details>
 
 ### System Requirements
 
-- [fish][] 3.0+
-- [fisher][] 4.0+
+- [fish][fish] 3.0+
+- [fisher][fisher] 4.0+
 
 Compatibility with macOS versions is maintained on a rolling basis. When
 possible, _backwards_ compatibility will be maintained as long as the
@@ -107,8 +97,7 @@ iTerm2'
 
 #### `app icon`
 
-Extracts macOS app icons as PNG (see `app find` for how applications
-are found).
+Extracts macOS app icons as PNG (see `app find` for how applications are found).
 
 ##### Options
 
@@ -130,8 +119,8 @@ how applications are found).
 
 ### `finder`
 
-Interacts with the Finder. If a window number parameter is accepted in
-a command, the first (front-most) window is number `1`. If a lower window is
+Interacts with the Finder. If a window number parameter is accepted in a
+command, the first (front-most) window is number `1`. If a lower window is
 specified, or no window is specified, that window becomes the first window.
 
 #### `finder track`

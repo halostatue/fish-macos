@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/has_app.fish
+
 function has_app -d 'Returns true if the named application exists'
     # Suppress these flags being passed to __macos_app_find
     argparse a/all q/quiet -- $argv

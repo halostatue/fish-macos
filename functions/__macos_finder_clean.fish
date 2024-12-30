@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_finder_clean.fish
+
 function __macos_finder_clean
     argparse --name 'finder clean' h/help -- $argv
     or return 1

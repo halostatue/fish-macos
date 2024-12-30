@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_mac_airdrop.fish
+
 function __macos_mac_airdrop
     argparse --name 'mac airdrop' h/help -- $argv
     or return 1

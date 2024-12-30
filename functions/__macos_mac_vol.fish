@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_mac_vol.fish
+
 function __macos_mac_vol
     argparse --name 'mac vol' h/help -- $argv
     or return 1

@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_mac_lsclean.fish
+
 function __macos_mac_lsclean
     argparse --name 'mac lsclean' h/help -- $argv
     or return 1

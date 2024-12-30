@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/completions/mac.fish
+
 complete --command mac --erase
 
 complete --command mac --arguments airdrop \

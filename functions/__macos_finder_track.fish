@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_finder_track.fish
+
 function __macos_finder_track
     argparse --name 'finder track' h/help -- $argv
     or return 1

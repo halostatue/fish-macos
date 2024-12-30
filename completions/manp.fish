@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/completions/manp.fish
+
 complete --command manp --erase
 complete --command manp --wraps man
 complete --command manp --exclusive --condition __fish_no_arguments \

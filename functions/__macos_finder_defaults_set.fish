@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_finder_defaults_set.fish
+
 function __macos_finder_defaults_set
     set --query argv[1]
     or return 1

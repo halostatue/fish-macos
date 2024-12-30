@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_finder_pwd.fish
+
 function __macos_finder_pwd
     argparse --name 'finder pwd' h/help -- $argv
     or return 1

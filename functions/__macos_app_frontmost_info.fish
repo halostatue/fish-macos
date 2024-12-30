@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_app_frontmost_info.fish
+
 function __macos_app_frontmost_info
     set --local value (lsappinfo info -only $argv[2] $argv[1] | string split =)[2]
     or return 1

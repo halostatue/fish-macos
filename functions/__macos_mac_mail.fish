@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_mac_mail.fish
+
 # Speed up Mail.app by vacuuming the Envelope Index
 # - Code from: http://web.archive.org/web/20071008123746/http://www.hawkwings.net/2007/03/03/scripts-to-automate-the-mailapp-envelope-speed-trick/
 # - Originally by "pmbuko" with modifications by Romulo

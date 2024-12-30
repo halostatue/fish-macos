@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_finder_icon.fish
+
 function __macos_finder_icon
     argparse --name 'finder icon' h/help -- $argv
     or return 1

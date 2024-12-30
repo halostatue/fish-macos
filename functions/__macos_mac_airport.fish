@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_mac_airport.fish
+
 function __macos_mac_airport
     argparse --name 'mac airport' h/help -- $argv
     or return 1

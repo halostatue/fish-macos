@@ -1,5 +1,13 @@
 # fish-macos Changelog
 
+## 6.0.0 / 2024-12-30
+
+- Removed `has:app`.
+
+- Updated Code of Conduct to Contributor Covenant 2.1.
+
+- Tags will no longer have `.x` attached.
+
 ## 5.1.2 / 2023-02-26
 
 - Fixed an error where MacPorts-installed `pam_reattach` was not being detected.
@@ -23,9 +31,10 @@
 ## 5.0 / 2022-12-05
 
 - Changed `manp` to be compatible with macOS Ventura and prefer not using an
-  external package (Ghostscript). The solution was adapted from [man2pdf.sh][]
-  by [Pico Mitchell][], originally found via Rob Griffiths’s [blog][] and Armin
-  Briegel's [Scripting OS X][].
+  external package (Ghostscript). The solution was adapted from
+  [man2pdf.sh][man2pdf.sh] by [Pico Mitchell][Pico Mitchell], originally found
+  via Rob Griffiths’s [blog][blog] and Armin Briegel's
+  [Scripting OS X][Scripting OS X].
 
 - Added `app frontmost` to show the app with the current top window.
 
@@ -37,14 +46,14 @@
 
 - Removed `trash`. There are better tools than this function, such as:
 
-  - [trash][], a small command-line program that moves files or folders to the
-    trash.
+  - [trash][trash], a small command-line program that moves files or folders to
+    the trash.
 
-  - [rmtrash][] is a small utility that will move the file to OS X's Trash
-    rather than obliterating the file (as rm does).
+  - [rmtrash][rmtrash] is a small utility that will move the file to OS X's
+    Trash rather than obliterating the file (as rm does).
 
-  - [macos-trash][] is a small command-line program that moves files or folders
-    to the trash, written in Swift
+  - [macos-trash][macos-trash] is a small command-line program that moves files
+    or folders to the trash, written in Swift
 
 - Improved completion scripts and overall consistency.
 
@@ -114,7 +123,7 @@
 ## 1.2 / 2019-12-31
 
 - Added `airdrop`, `trash`, and several aliases to subcommands for `finder`
-  (matching [oh-my-fish/plugin-osx][]).
+  (matching [oh-my-fish/plugin-osx][oh-my-fish/plugin-osx]).
 
 - Improved some `finder` subcommands.
 

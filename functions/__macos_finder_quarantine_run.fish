@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_finder_quarantine_run.fish
+
 function __macos_finder_quarantine_run
     set --query argv[1]
     or return 1

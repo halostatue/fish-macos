@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/mac.fish
+
 function mac -d 'Manage several macOS functions'
     argparse --stop-nonopt h/help -- $argv
 
@@ -14,6 +16,7 @@ Subcommands:
   lsclean         Cleans the LaunchServices registration list
   mail            Speed up Mail.app by vacuuming the envelope index
   proxy-icon      Enables or disables proxy icon delay
+  serialnumber    Gets the machine serial number
   touchid         Manages Touch ID authorization for sudo
   transparency    Enables or disables interface transparency
   version         Shows the current macOS version
@@ -42,6 +45,8 @@ Options:
             __macos_mac_mail $argv
         case proxy-icon
             __macos_mac_proxy_icon $argv
+        case serialnumber
+            __macos_mac_serialnumber $argv
         case touchid
             __macos_mac_touchid $argv
         case transparency

@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_finder_pwd_update.fish
+
 function __macos_finder_pwd_update
     argparse --exclusive column,list,icon column list icon -- $argv
     or return 1

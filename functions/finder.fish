@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/finder.fish
+
 # Based on bashfinder: https://github.com/NapoleonWils0n/bashfinder.git
 # and my port to zsh.
 function finder -d 'Manipulate the finder with the current shell'

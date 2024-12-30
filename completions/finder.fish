@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/completions/finder.fish
+
 complete --command finder --erase
 
 complete --command finder --arguments track \

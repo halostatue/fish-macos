@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/ql.fish
+
 function ql -d 'QuickLook a file or directory'
     # Updated based on https://gist.github.com/chockenberry/13c15466417b88e40f23e58df8091dac
     if set --query argv[1]

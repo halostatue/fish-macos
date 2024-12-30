@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_mac_proxy_icon.fish
+
 function __macos_mac_proxy_icon
     argparse --name 'mac proxy-icon' h/help q/query -- $argv
     or return 1

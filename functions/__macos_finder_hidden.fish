@@ -1,3 +1,5 @@
+# @halostatue/fish-macos/functions/__macos_finder_hidden.fish
+
 function __macos_finder_hidden
     argparse --name 'finder hidden' h/help -- $argv
     or return 1

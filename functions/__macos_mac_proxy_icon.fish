@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_proxy_icon.fish
+# @halostatue/fish-macos/functions/__macos_mac_proxy_icon.fish:v6.0.1
 
 function __macos_mac_proxy_icon
     argparse --name 'mac proxy-icon' h/help q/query -- $argv
@@ -23,12 +23,12 @@ Options:
         return 0
     end
 
-    set --local state (string lower -- $argv[1])
+    set --function state (string lower -- $argv[1])
     set --erase argv[1]
 
     switch $state
         case status ''
-            set --local value (__macos_mac_defaults_query -g NSToolbarTitleViewRolloverDelay 0.5)
+            set --function value (__macos_mac_defaults_query -g NSToolbarTitleViewRolloverDelay 0.5)
 
             if set --query _flag_query
                 test $value -eq 0

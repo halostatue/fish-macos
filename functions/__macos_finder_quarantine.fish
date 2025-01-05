@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_finder_quarantine.fish
+# @halostatue/fish-macos/functions/__macos_finder_quarantine.fish:v6.0.1
 
 function __macos_finder_quarantine
     argparse --name 'finder quarantine' h/help -- $argv
@@ -20,7 +20,7 @@ Options:
         return 0
     end
 
-    set --local verb (string lower -- $argv[1])
+    set --function verb (string lower -- $argv[1])
     set --erase argv[1]
 
     switch $verb

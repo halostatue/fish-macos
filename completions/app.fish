@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/completions/app.fish
+# @halostatue/fish-macos/completions/app.fish:v6.0.1
 
 complete --command app --erase
 

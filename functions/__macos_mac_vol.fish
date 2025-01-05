@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_vol.fish
+# @halostatue/fish-macos/functions/__macos_mac_vol.fish:v6.0.1
 
 function __macos_mac_vol
     argparse --name 'mac vol' h/help -- $argv
@@ -20,7 +20,7 @@ Options:
         return 0
     end
 
-    set --local action (string lower -- $argv[1])
+    set --function action (string lower -- $argv[1])
     set --erase argv[1]
 
     switch $action

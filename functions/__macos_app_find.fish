@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_app_find.fish
+# @halostatue/fish-macos/functions/__macos_app_find.fish:v6.0.1
 
 function __macos_app_find
     argparse --name 'app find' x/exact a/all q/quiet h/help -- $argv
@@ -19,11 +19,11 @@ Options:
   -h, --help              Show this help
 
 Examples:
-  > app find -a 1password
+  > app find --all 1password
   /Applications/1Password for Safari.app
   /Applications/1Password.app
 
-  > app find -x 1password
+  > app find --exact 1password
   /Applications/1Password.app'
         return 0
     end
@@ -34,8 +34,8 @@ Examples:
         return 1
     end
 
-    set --local a Applications
-    set --local paths \
+    set --function a Applications
+    set --function paths \
         /$a \
         ~/$a \
         /$a/Setapp \
@@ -44,7 +44,7 @@ Examples:
         /Developer/Applications \
         /System/Applications
 
-    set --local found 0
+    set --function found 0
 
     for pattern in $argv
         set pattern (string replace '\.app/?$' '' $pattern)
@@ -53,10 +53,10 @@ Examples:
             set --local found_item 0
 
             if set --query _flag_exact
-                if string match -i -e -q /$pattern.app $candidate
+                if string match --ignore-case --entire --quiet /$pattern.app $candidate
                     set found_item 1
                 end
-            else if string match -i -e -q $pattern $candidate
+            else if string match --ignore-case --entire --quiet $pattern $candidate
                 set found_item 1
             end
 

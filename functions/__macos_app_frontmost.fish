@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_app_frontmost.fish
+# @halostatue/fish-macos/functions/__macos_app_frontmost.fish:v6.0.1
 
 function __macos_app_frontmost
     argparse --name 'app frontmost' \
@@ -6,7 +6,7 @@ function __macos_app_frontmost
         -- $argv
     or return 1
 
-    if set -q _flag_help
+    if set --query _flag_help
         echo 'Usage: app frontmost [options]
 
 Retrieves details about the front-most application.
@@ -25,15 +25,15 @@ Example:
         return 0
     end
 
-    set --local front (lsappinfo front)
+    set --function front (lsappinfo front)
     or return 1
 
-    set --local items 0
+    set --function items 0
 
-    if set -q _flag_all
+    if set --query _flag_all
         set items 4
     else
-        set -q _flag_bundle_id _flag_path _flag_name _flag_pid
+        set --query _flag_bundle_id _flag_path _flag_name _flag_pid
         set --local missing $status
 
         switch $missing
@@ -48,53 +48,48 @@ Example:
         end
     end
 
-    set --local name
-    set --local bundle_id
-    set --local bundle_path
-    set --local pid
-
-    if set -q _flag_name || set -q _flag_all
-        set name (__macos_app_frontmost_info $front name)
+    if set --query _flag_name || set --query _flag_all
+        set --function name (__macos_app_frontmost_info $front name)
         or return 1
     end
 
-    if set -q _flag_bundle_id || set -q _flag_all
-        set bundle_id (__macos_app_frontmost_info $front bundleID)
+    if set --query _flag_bundle_id || set --query _flag_all
+        set --function bundle_id (__macos_app_frontmost_info $front bundleID)
         or return 1
     end
 
-    if set -q _flag_path || set -q _flag_all
-        set bundle_path (__macos_app_frontmost_info $front bundlepath)
+    if set --query _flag_path || set --query _flag_all
+        set --function bundle_path (__macos_app_frontmost_info $front bundlepath)
         or return 1
     end
 
-    if set -q _flag_pid || set -q _flag_all
-        set pid (__macos_app_frontmost_info $front pid)
+    if set --query _flag_pid || set --query _flag_all
+        set --function pid (__macos_app_frontmost_info $front pid)
         or return 1
     end
 
-    if set -q _flag_all
+    if set --query _flag_all
         printf "%s: %s %s (%s)\n" $name $bundle_id $bundle_path $pid
     else
-        if set -q _flag_name
+        if set --query _flag_name
             printf "%s" $name
             test $items -gt 1 && printf ": "
             set items (math $items - 1)
         end
 
-        if set -q _flag_bundle_id
+        if set --query _flag_bundle_id
             printf "%s" $bundle_id
             test $items -gt 1 && printf " "
             set items (math $items - 1)
         end
 
-        if set -q _flag_path
+        if set --query _flag_path
             printf "%s" $bundle_path
             test $items -gt 1 && printf " "
             set items (math $items - 1)
         end
 
-        if set -q _flag_pid
+        if set --query _flag_pid
             if test $items -gt 1
                 printf "(%s)" $pid
             else

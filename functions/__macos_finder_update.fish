@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_finder_update.fish
+# @halostatue/fish-macos/functions/__macos_finder_update.fish:v6.0.1
 
 function __macos_finder_update
     argparse --name 'finder update' h/help -- $argv

@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_finder_pushd.fish
+# @halostatue/fish-macos/functions/__macos_finder_pushd.fish:v6.0.1
 
 function __macos_finder_pushd
     argparse --name 'finder pushd' h/help -- $argv

@@ -1,10 +1,10 @@
-# @halostatue/fish-macos/functions/__macos_finder_defaults_query.fish
+# @halostatue/fish-macos/functions/__macos_finder_defaults_query.fish:v6.0.1
 
 function __macos_finder_defaults_query
     set --query argv[1]
     or return 1
 
-    set --local value (defaults read com.apple.Finder $argv[1] 2>/dev/null)
+    set --function value (defaults read com.apple.Finder $argv[1] 2>/dev/null)
     or return 1
 
     switch $value

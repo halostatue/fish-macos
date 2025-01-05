@@ -6,7 +6,7 @@ Useful functions for macOS using [fish shell][fish].
 
 ## Installation
 
-Install with [Fisher][fisher] (recommended):
+Install with [Fisher][fisher]:
 
 ```fish
 fisher install halostatue/fish-macos@v6
@@ -14,7 +14,7 @@ fisher install halostatue/fish-macos@v6
 
 ### System Requirements
 
-- [fish][fish] 3.0+
+- [fish][fish] 3.4+
 - [fisher][fisher] 4.0+
 
 Compatibility with macOS versions is maintained on a rolling basis. When

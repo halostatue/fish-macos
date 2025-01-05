@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/app.fish
+# @halostatue/fish-macos/functions/app.fish:v6.0.1
 
 function app --description 'Operate on macOS applications'
     argparse --stop-nonopt h/help -- $argv
@@ -20,7 +20,7 @@ Options:
         return 0
     end
 
-    set --local cmd $argv[1]
+    set --function cmd $argv[1]
     set --erase argv[1]
 
     switch (string lower -- $cmd)

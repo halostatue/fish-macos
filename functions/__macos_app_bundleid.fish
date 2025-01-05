@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_app_bundleid.fish
+# @halostatue/fish-macos/functions/__macos_app_bundleid.fish:v6.0.1
 
 function __macos_app_bundleid
     argparse --name 'app bundleid' x/exact a/all h/help q/quiet s/short -- $argv
@@ -33,7 +33,7 @@ Examples:
         return 1
     end
 
-    set --local apps (__macos_app_find $_flag_exact $_flag_all $argv)
+    set --function apps (__macos_app_find $_flag_exact $_flag_all $argv)
     or return 1
 
     for app in $apps

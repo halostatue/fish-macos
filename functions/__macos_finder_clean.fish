@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_finder_clean.fish
+# @halostatue/fish-macos/functions/__macos_finder_clean.fish:v6.0.1
 
 function __macos_finder_clean
     argparse --name 'finder clean' h/help -- $argv
@@ -15,9 +15,11 @@ Options:
         return 0
     end
 
-    set --local paths $argv
-    set --query argv[1]
-    or set paths .
+    if set --query argv[1]
+        set --function paths $argv
+    else
+        set --function paths .
+    end
 
     for path in $paths
         test -d $path

@@ -16,8 +16,8 @@ jobs:
       - uses: fish-shop/install-fish-shell@v1.0.38
       - uses: fish-shop/indent-check@v1.0.26
       - uses: fish-shop/syntax-check@v2.2.26
-      # - uses: fish-shop/install-plugin@v2.3.28
-      #   with:
-      #     plugin-manager: fisher
-      #     plugins: IlanCosman/clownfish
-      # - uses: fish-shop/run-fishtape-tests@v2.3.26
+      - uses: fish-shop/install-plugin@v2.3.28
+        with:
+          plugin-manager: fisher
+          plugins: IlanCosman/clownfish
+      - uses: fish-shop/run-fishtape-tests@v2.3.26

@@ -1,6 +1,6 @@
-# @halostatue/fish-macos/functions/mac.fish
+# @halostatue/fish-macos/functions/mac.fish:v6.0.1
 
-function mac -d 'Manage several macOS functions'
+function mac --description 'Manage several macOS functions'
     argparse --stop-nonopt h/help -- $argv
 
     if set --query _flag_help
@@ -27,7 +27,7 @@ Options:
         return 0
     end
 
-    set --local subcommand (string lower -- $argv[1])
+    set --function subcommand (string lower -- $argv[1])
     set --erase argv[1]
 
     switch $subcommand

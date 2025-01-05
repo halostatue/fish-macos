@@ -1,15 +1,15 @@
-# @halostatue/fish-macos/functions/manp.fish
+# @halostatue/fish-macos/functions/manp.fish:v6.0.1
 
 # Based on man2pdf.sh created by Pico Mitchell (of Random Applications)
 # on 11/16/22, licensed under the MIT license.
-function manp -d 'View a man page as a PDF'
-    set --local cache_path "/private/tmp/man PDFs"
+function manp --description 'View a man page as a PDF'
+    set --function cache_path "/private/tmp/man PDFs"
 
     if set --query --universal manp_cache_path
         set cache_path $manp_cache_path
     end
 
-    argparse -s h/help C/clear-cache -- $argv
+    argparse --stop-nonopt h/help C/clear-cache -- $argv
 
     if set --query _flag_help
         echo 'Usage: '(status function)' --help
@@ -29,7 +29,7 @@ they will be cleared on any OS upgrade.'
         return $status
     end
 
-    set --local man_path (/usr/bin/man -w $argv 2> /dev/null)
+    set --function man_path (/usr/bin/man -w $argv 2> /dev/null)
 
     if test -f $man_path
         # Save every man page PDF into a sub-folder for the current OS version

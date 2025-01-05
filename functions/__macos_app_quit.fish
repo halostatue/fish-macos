@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_app_quit.fish
+# @halostatue/fish-macos/functions/__macos_app_quit.fish:v6.0.1
 
 function __macos_app_quit
     argparse --name 'app quit' x/exact r/restart h/help -- $argv
@@ -23,13 +23,11 @@ Options:
         return 1
     end
 
-    set --local apps
-
     if set --query _flag_exact
-        set apps (__macos_app_find --exact $argv)
+        set --function apps (__macos_app_find --exact $argv)
         or return 1
     else
-        set apps (__macos_app_find --all $argv)
+        set --function apps (__macos_app_find --all $argv)
         or return 1
     end
 

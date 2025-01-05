@@ -1,11 +1,11 @@
-# @halostatue/fish-macos/functions/__macos_finder_quarantine_run.fish
+# @halostatue/fish-macos/functions/__macos_finder_quarantine_run.fish:v6.0.1
 
 function __macos_finder_quarantine_run
     set --query argv[1]
     or return 1
 
-    set --local databases ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV*
-    set --local cmd sqlite3 -separator ' | '
+    set --function databases ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV*
+    set --function cmd sqlite3 -separator ' | '
 
     for db in $databases
         $cmd $db $argv

@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_airdrop.fish
+# @halostatue/fish-macos/functions/__macos_mac_airdrop.fish:v6.0.1
 
 function __macos_mac_airdrop
     argparse --name 'mac airdrop' h/help -- $argv
@@ -21,7 +21,7 @@ Options:
         return 0
     end
 
-    set --local subcommand (string lower -- $argv[1])
+    set --function subcommand (string lower -- $argv[1])
     set --erase argv[1]
 
     switch $subcommand

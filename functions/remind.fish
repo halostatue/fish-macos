@@ -1,18 +1,16 @@
-# @halostatue/fish-macos/functions/remind.fish
+# @halostatue/fish-macos/functions/remind.fish:v6.0.1
 
-function remind -d 'Add a reminder to Reminders.app'
+function remind --description 'Add a reminder to Reminders.app'
     is_mac 'mountain lion'
     or return 1
 
     has_app Reminders
     or return 1
 
-    set --local text
-
     if set --query argv
-        set text $argv
+        set --function text $argv
     else
-        set text (cat - | sed -e 's/$/<br>/')
+        set --function text (cat - | sed -e 's/$/<br>/')
     end
 
     test -z $text

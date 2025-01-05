@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_transparency.fish
+# @halostatue/fish-macos/functions/__macos_mac_transparency.fish:v6.0.1
 
 function __macos_mac_transparency
     argparse --name 'mac transparency' h/help q/query -- $argv
@@ -22,12 +22,12 @@ Options:
         return 0
     end
 
-    set --local state (string lower -- $argv[1])
+    set function state (string lower -- $argv[1])
     set --erase argv[1]
 
     switch $state
         case status ''
-            set --local value (__macos_mac_defaults_query com.apple.universalaccess reduceTransparency 0)
+            set function value (__macos_mac_defaults_query com.apple.universalaccess reduceTransparency 0)
 
             if set --query _flag_query
                 test $value -eq 0

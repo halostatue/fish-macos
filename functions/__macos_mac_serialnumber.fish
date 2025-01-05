@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_serialnumber.fish
+# @halostatue/fish-macos/functions/__macos_mac_serialnumber.fish:v6.0.1
 
 function __macos_mac_serialnumber
     argparse --name 'mac serialnumber' h/help c/copy -- $argv
@@ -15,7 +15,7 @@ Options:
         return 0
     end
 
-    set --local serial (ioreg -l | string replace --filter --regex --all '^.*"IOPlatformSerialNumber"\s+=\s+"([^"]+)"' '$1')
+    set --function serial (ioreg -l | string replace --filter --regex --all '^.*"IOPlatformSerialNumber"\s+=\s+"([^"]+)"' '$1')
 
     set --query _flag_copy && echo $serial | pbcopy
     echo $serial

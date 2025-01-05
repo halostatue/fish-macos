@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_airport.fish
+# @halostatue/fish-macos/functions/__macos_mac_airport.fish:v6.0.1
 
 function __macos_mac_airport
     argparse --name 'mac airport' h/help -- $argv
@@ -28,7 +28,7 @@ Options:
         return 0
     end
 
-    set --local cmd (string lower -- $argv[1])
+    set --function cmd (string lower -- $argv[1])
     set --erase argv[1]
 
     switch $cmd

@@ -24,6 +24,5 @@ code contributions. When contributing code, please note:
 - Submit a GitHub pull request with your changes.
 - New or changed behaviours require new or updated documentation.
 
-[minitest]: https://github.com/seattlerb/minitest
 [quality commit messages]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
 [fishtape]: https://github.com/jorgebucaran/fishtape

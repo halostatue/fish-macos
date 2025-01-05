@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_finder_column.fish
+# @halostatue/fish-macos/functions/__macos_finder_column.fish:v6.0.1
 
 function __macos_finder_column
     argparse --name 'finder column' h/help -- $argv

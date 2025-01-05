@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_touchid.fish
+# @halostatue/fish-macos/functions/__macos_mac_touchid.fish:v6.0.1
 
 function __macos_mac_touchid
     argparse --name 'mac touchid' h/help q/quiet -- $argv
@@ -24,7 +24,7 @@ Options:
         return 0
     end
 
-    set --local subsystem (string lower -- $argv[1])
+    set --function subsystem (string lower -- $argv[1])
     set --erase argv[1]
 
     if set --query _flag_quiet

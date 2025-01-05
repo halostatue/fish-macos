@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_finder_hidden.fish
+# @halostatue/fish-macos/functions/__macos_finder_hidden.fish:v6.0.1
 
 function __macos_finder_hidden
     argparse --name 'finder hidden' h/help -- $argv
@@ -21,8 +21,8 @@ Options:
         return 0
     end
 
-    set --local action (string lower -- $argv[1])
-    set --local key AppleShowAllFiles
+    set --function action (string lower -- $argv[1])
+    set --function key AppleShowAllFiles
 
     switch $action
         case off

@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_font_smoothing.fish
+# @halostatue/fish-macos/functions/__macos_mac_font_smoothing.fish:v6.0.1
 
 function __macos_mac_font_smoothing
     argparse --name 'mac font-smoothing' h/help -- $argv
@@ -20,7 +20,7 @@ Options:
         return 0
     end
 
-    set --local state (string lower -- $argv[1])
+    set --function state (string lower -- $argv[1])
     set --erase argv[1]
 
     switch $state

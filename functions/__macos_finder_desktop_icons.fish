@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_finder_desktop_icons.fish
+# @halostatue/fish-macos/functions/__macos_finder_desktop_icons.fish:v6.0.1
 
 function __macos_finder_desktop_icons
     argparse --name 'finder desktop-icons' h/help -- $argv
@@ -20,8 +20,8 @@ Options:
         return 0
     end
 
-    set --local action (string lower -- $argv[1])
-    set --local key CreateDesktop
+    set --function action (string lower -- $argv[1])
+    set --function key CreateDesktop
 
     switch $action
         case off

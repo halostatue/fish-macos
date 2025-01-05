@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_touchid_sudo.fish
+# @halostatue/fish-macos/functions/__macos_mac_touchid_sudo.fish:v6.0.1
 
 function __macos_mac_touchid_sudo
     argparse --name 'mac touchid sudo' h/help q/quiet -- $argv
@@ -26,10 +26,10 @@ Options:
         return 0
     end
 
-    set --local subcommand (string lower -- $argv[1])
+    set --function subcommand (string lower -- $argv[1])
     set --erase argv[1]
 
-    set --local reattach ''
+    set --function reattach ''
     for d in /opt/homebrew /usr/local /usr /opt/local
         for f in $d/lib/pam/pam_reattach.so*
             if test -f $f

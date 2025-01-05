@@ -1,12 +1,12 @@
-# @halostatue/fish-macos/functions/__macos_finder_pwd_update.fish
+# @halostatue/fish-macos/functions/__macos_finder_pwd_update.fish:v6.0.1
 
 function __macos_finder_pwd_update
     argparse --exclusive column,list,icon column list icon -- $argv
     or return 1
 
-    set --local window_count 1
-    set --local view ''
-    set --local view_type ''
+    set --function window_count 1
+    set --function view ''
+    set --function view_type ''
 
     if set --query _flag_column
         set view_type column

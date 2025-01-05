@@ -1,10 +1,10 @@
-# @halostatue/fish-macos/functions/__macos_finder_pwd_get.fish
+# @halostatue/fish-macos/functions/__macos_finder_pwd_get.fish:v6.0.1
 
 function __macos_finder_pwd_get
-    set --local window 1
+    set --function window 1
 
     if set --query argv[1]
-        set window 1
+        set window $argv[1]
     end
 
     echo 'tell application "Finder"

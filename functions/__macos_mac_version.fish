@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_version.fish
+# @halostatue/fish-macos/functions/__macos_mac_version.fish:v6.0.1
 
 function __macos_mac_version
     argparse \
@@ -22,7 +22,7 @@ Options:
         return 0
     end
 
-    set --local os_version (sw_vers -productVersion)
+    set --function os_version (sw_vers -productVersion)
 
     if set --query _flag_version
         echo $os_version

@@ -1,30 +1,32 @@
-# @halostatue/fish-macos/functions/note.fish
+# @halostatue/fish-macos/functions/note.fish:v6.0.1
 
-function note -d 'Add a note to Notes.app'
+function note --description 'Add a note to Notes.app'
     is_mac 'mountain lion'
     or return 1
 
     has_app Notes
     or return 1
 
-    set --local text
-
     if set --query argv
-        set text $argv
+        set --function text $argv
     else
-        set text (cat - | sed -e 's/$/<br>/')
+        set --function text (cat - | sed -e 's/$/<br>/')
     end
 
     test -z $text
     or return 1
 
-    set --local head $text[1]
-    set --query text[2]
-    and set --local body $text[2..-1]
+    set --function head $text[1]
 
-    set --query body
-    and set --local properties '{name: "'$head'", body: "'($body[1..-1])'"}'
-    or set --local properties '{name: "'$head'"}'
+    if set --query text[2]
+        set --function body $text[2..-1]
+    end
+
+    if set --query body
+        set --function properties '{name: "'$head'", body: "'($body[1..-1])'"}'
+    else
+        set --function properties '{name: "'$head'"}'
+    end
 
     echo 'tell application "Notes"
   tell account "iCloud"

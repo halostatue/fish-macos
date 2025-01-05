@@ -1,8 +1,8 @@
-# @halostatue/fish-macos/functions/finder.fish
+# @halostatue/fish-macos/functions/finder.fish:v6.0.1
 
 # Based on bashfinder: https://github.com/NapoleonWils0n/bashfinder.git
 # and my port to zsh.
-function finder -d 'Manipulate the finder with the current shell'
+function finder --description 'Manipulate the finder with the current shell'
     argparse --stop-nonopt h/help -- $argv
 
     if set --query _flag_help
@@ -33,7 +33,7 @@ Options:
         return 0
     end
 
-    set --local verb (string lower -- $argv[1])
+    set --function verb (string lower -- $argv[1])
     set --erase argv[1]
 
     switch $verb

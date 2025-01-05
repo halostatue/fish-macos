@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_app_icon.fish
+# @halostatue/fish-macos/functions/__macos_app_icon.fish:v6.0.1
 
 function __macos_app_icon
     argparse --name 'app quit' x/exact h/help 'o/output=' 'w/width=' -- $argv
@@ -27,19 +27,17 @@ Options:
     end
 
 
-    set --local apps
-
     if set --query _flag_exact
-        set apps (__macos_app_find --exact $argv)
+        set --function apps (__macos_app_find --exact $argv)
         or return 1
     else
-        set apps (__macos_app_find --all $argv)
+        set --function apps (__macos_app_find --all $argv)
         or return 1
     end
 
-    set --local app_count (count $apps)
+    set --function app_count (count $apps)
 
-    set --local output_path $PWD
+    set --function output_path $PWD
     if not test -z $_flag_output
         if test -e $_flag_output
             if test -f $_flag_output
@@ -65,7 +63,7 @@ Options:
     for app in $apps
         set --local icon $app/Contents/Resources/(
             defaults read $app/Contents/Info CFBundleIconFile |
-            string replace -r '\.icns$' ''
+            string replace --regex '\.icns$' ''
         ).icns
 
         set --local name (basename $app .app)_icon.png

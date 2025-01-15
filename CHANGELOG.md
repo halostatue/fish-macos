@@ -1,5 +1,28 @@
 # fish-macos Changelog
 
+## 6.1.0 / 2025-01-15
+
+- Added `mac brightness` to change the screen brightness. Adapted from
+  [mattmc3/macos.fish/functions/bright.fish][bright].
+
+- Rewrote `mac touchid sudo` encompassing a number of changes.
+
+  - MacPorts-installed `pam_reattach` is no longer supported and will not be
+    located. If it is present (even if manually added), then
+    `mac touchid sudo on` **will** remove it. A warning about this will always
+    be printed, even if `--quiet` is specified.
+
+  - If `pam_reattach` is not configured with the currently discovered
+    `pam_reattach`, a message will be printed (even if `--quiet` is specified)
+    and the existing `pam_reattach` configuration will be removed.
+
+  - Recent versions of macOS support a file `/etc/pam.d/sudo_local` that is kept
+    during operating system upgrades so that Touch ID support should continue to
+    work.
+
+    If a migration from `/etc/pam.d/sudo` to `/etc/pam.d/sudo_local` is
+    detected, a message will be printed, even if `--quiet` is specified.
+
 ## 6.0.1 / 2025-01-04
 
 - Added version information to comment tags.
@@ -153,3 +176,4 @@
 [rmtrash]: http://www.nightproductions.net/cli.htm
 [scripting os x]: https://scriptingosx.com/2022/11/on-viewing-man-pages-ventura-update/
 [trash]: https://github.com/ali-rantakari/trash
+[bright]: https://github.com/mattmc3/macos.fish/blob/main/functions/bright.fish

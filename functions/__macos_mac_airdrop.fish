@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_airdrop.fish:v6.0.1
+# @halostatue/fish-macos/functions/__macos_mac_airdrop.fish:v6.1.0
 
 function __macos_mac_airdrop
     argparse --name 'mac airdrop' h/help -- $argv

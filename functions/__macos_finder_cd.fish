@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_finder_cd.fish:v6.0.1
+# @halostatue/fish-macos/functions/__macos_finder_cd.fish:v6.1.0
 
 function __macos_finder_cd
     argparse --name 'finder cd' h/help -- $argv

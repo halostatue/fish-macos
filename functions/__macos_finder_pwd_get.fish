@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_finder_pwd_get.fish:v6.0.1
+# @halostatue/fish-macos/functions/__macos_finder_pwd_get.fish:v6.1.0
 
 function __macos_finder_pwd_get
     set --function window 1

@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/mac.fish:v6.0.1
+# @halostatue/fish-macos/functions/mac.fish:v6.1.0
 
 function mac --description 'Manage several macOS functions'
     argparse --stop-nonopt h/help -- $argv
@@ -9,18 +9,19 @@ function mac --description 'Manage several macOS functions'
 Manage several macOS functions.
 
 Subcommands:
-  airdrop         Manages AirDrop.
-  airport         Performs various WiFi (AirPort) operations
-  flushdns        Flushes the DNS cache
-  font-smoothing  Enables or disables font smoothing
-  lsclean         Cleans the LaunchServices registration list
-  mail            Speed up Mail.app by vacuuming the envelope index
-  proxy-icon      Enables or disables proxy icon delay
-  serialnumber    Gets the machine serial number
-  touchid         Manages Touch ID authorization for sudo
-  transparency    Enables or disables interface transparency
-  version         Shows the current macOS version
-  vol             Controls the volume level
+  airdrop          Manages AirDrop.
+  airport          Performs various WiFi (AirPort) operations
+  brightness       Changes the screen brightness
+  flushdns         Flushes the DNS cache
+  font-smoothing   Enables or disables font smoothing
+  lsclean          Cleans the LaunchServices registration list
+  mail             Speed up Mail.app by vacuuming the envelope index
+  proxy-icon       Enables or disables proxy icon delay
+  serialnumber     Gets the machine serial number
+  touchid          Manages Touch ID authorization for sudo
+  transparency     Enables or disables interface transparency
+  version          Shows the current macOS version
+  vol              Controls the volume level
 
 Options:
   -h, --help               Show this help'
@@ -31,13 +32,13 @@ Options:
     set --erase argv[1]
 
     switch $subcommand
-        case airdrop
+        case airdrop ad aird
             __macos_mac_airdrop $argv
-        case airport
+        case airport ap airp
             __macos_mac_airport $argv
-        case flushdns
+        case flushdns fl
             __macos_mac_flushdns $argv
-        case font-smoothing
+        case font-smoothing fo
             __macos_mac_font_smoothing $argv
         case lsclean
             __macos_mac_lsclean $argv
@@ -45,15 +46,15 @@ Options:
             __macos_mac_mail $argv
         case proxy-icon
             __macos_mac_proxy_icon $argv
-        case serialnumber
+        case serialnumber sn
             __macos_mac_serialnumber $argv
-        case touchid
+        case touchid to
             __macos_mac_touchid $argv
-        case transparency
+        case transparency tr
             __macos_mac_transparency $argv
-        case vol
+        case vol vo
             __macos_mac_vol $argv
-        case version
+        case version ve
             __macos_mac_version $argv
         case ''
             echo >&2 'mac: No command provided.'

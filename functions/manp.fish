@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/manp.fish:v6.0.1
+# @halostatue/fish-macos/functions/manp.fish:v6.1.0
 
 # Based on man2pdf.sh created by Pico Mitchell (of Random Applications)
 # on 11/16/22, licensed under the MIT license.

@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/finder.fish:v6.0.1
+# @halostatue/fish-macos/functions/finder.fish:v6.1.0
 
 # Based on bashfinder: https://github.com/NapoleonWils0n/bashfinder.git
 # and my port to zsh.

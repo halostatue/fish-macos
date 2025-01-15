@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_serialnumber.fish:v6.0.1
+# @halostatue/fish-macos/functions/__macos_mac_serialnumber.fish:v6.1.0
 
 function __macos_mac_serialnumber
     argparse --name 'mac serialnumber' h/help c/copy -- $argv

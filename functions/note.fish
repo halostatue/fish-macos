@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/note.fish:v6.0.1
+# @halostatue/fish-macos/functions/note.fish:v6.1.0
 
 function note --description 'Add a note to Notes.app'
     is_mac 'mountain lion'

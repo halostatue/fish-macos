@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/completions/mac.fish:v6.0.1
+# @halostatue/fish-macos/completions/mac.fish:v6.1.0
 
 complete --command mac --erase
 
@@ -7,7 +7,10 @@ complete --command mac --arguments airdrop \
     --description 'Changes AirDrop settings'
 complete --command mac --arguments airport \
     --exclusive --condition __fish_use_subcommand \
-    --description 'Works with AirPort (WiFi) settings'
+    --description 'Work with AirPort (WiFi) settings'
+complete --command mac --arguments brightness \
+    --exclusive --condition __fish_use_subcommand \
+    --description 'Adjust the screen brightness level'
 complete --command mac --arguments flushdns \
     --exclusive --condition __fish_use_subcommand \
     --description 'Flushes DNS'
@@ -33,10 +36,15 @@ complete --command mac --arguments vol \
     --exclusive --condition __fish_use_subcommand \
     --description 'Changes Mac volume; accepts 0–100 volume percentage'
 
-for subcommand in airdrop airport flushdns font-smoothing lsclean mail proxy-icon transparency version vol
+for subcommand in airdrop airport brightness flushdns font-smoothing lsclean mail proxy-icon transparency version vol
     complete --command mac --condition '__fish_seen_subcommand_from '$subcommand \
         --short-option h --long-option help --description 'Help for mac '$subcommand
 end
+
+complete --command mac --condition '__fish_seen_subcommand_from brightness' \
+    --arguments up --description 'Increases screen brightness'
+complete --command mac --condition '__fish_seen_subcommand_from brightness' \
+    --arguments down --description 'Decreases screen brightness'
 
 for subcommand in airdrop proxy-icon transparency
     complete --command mac --condition '__fish_seen_subcommand_from '$subcommand \

@@ -58,10 +58,12 @@ tag version:
         exit 1
     end
 
+    set major (string split -f1 . {{ version }})
+    set minor (string split -f1,2 . {{ version }} | string join .)
 
+    git tag -f v$major -m "v$major -> v{{ version }}"
+    git tag -f v$minor -m "v$minor -> v{{ version }}"
     git tag v{{ version }}
-
-    echo "Remember to update the major and minor version tags."
 
 # Format fish files
 fmt:

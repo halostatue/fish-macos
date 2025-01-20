@@ -13,11 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: extractions/setup-just@v2
-      - uses: fish-shop/install-fish-shell@v1.0.38
-      - uses: fish-shop/indent-check@v1.0.26
-      - uses: fish-shop/syntax-check@v2.2.26
-      - uses: fish-shop/install-plugin@v2.3.28
+      - uses: fish-shop/install-fish-shell@v1.0.40
+      - uses: fish-shop/indent-check@v1.0.28
+      - uses: fish-shop/syntax-check@v2.2.28
+      - uses: fish-shop/install-plugin@v2.3.30
         with:
           plugin-manager: fisher
           plugins: IlanCosman/clownfish
-      - uses: fish-shop/run-fishtape-tests@v2.3.26
+      - uses: fish-shop/run-fishtape-tests@v2.3.28

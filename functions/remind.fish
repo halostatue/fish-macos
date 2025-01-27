@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/remind.fish:v6.1.0
+# @halostatue/fish-macos/functions/remind.fish:v7.0.0
 
 function remind --description 'Add a reminder to Reminders.app'
     is_mac 'mountain lion'

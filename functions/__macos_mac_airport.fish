@@ -1,4 +1,13 @@
-# @halostatue/fish-macos/functions/__macos_mac_airport.fish:v6.1.0
+# @halostatue/fish-macos/functions/__macos_mac_airport.fish:v7.0.0
+
+function __macos_mac_airport::ssid
+    __macos_mac_airport::run -I | string replace --filter --regex '\s+SSID: (\S+)' '$1'
+end
+
+function __macos_mac_airport::run
+    /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport \
+        $argv
+end
 
 function __macos_mac_airport
     argparse --name 'mac airport' h/help -- $argv
@@ -34,9 +43,9 @@ Options:
     switch $cmd
         case scan ''
             printf "Scanning...\r"
-            __macos_mac_airport_run -s
+            __macos_mac_airport::run -s
         case network ssid
-            __macos_mac_airport_ssid
+            __macos_mac_airport::ssid
         case off
             networksetup -setairportpower en0 off
         case on
@@ -54,7 +63,7 @@ Options:
             if set --query argv[1]
                 set ssid $argv[1]
             else
-                set ssid (__macos_mac_airport_ssid)
+                set ssid (__macos_mac_airport::ssid)
             end
 
             security find-generic-password -D "AirPort network password" -l $ssid -gw

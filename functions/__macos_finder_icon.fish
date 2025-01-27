@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_finder_icon.fish:v6.1.0
+# @halostatue/fish-macos/functions/__macos_finder_icon.fish:v7.0.0
 
 function __macos_finder_icon
     argparse --name 'finder icon' h/help -- $argv
@@ -14,5 +14,5 @@ Options:
         return 0
     end
 
-    __macos_finder_pwd_update --icon $argv
+    __macos_finder_pwd::update --icon $argv
 end

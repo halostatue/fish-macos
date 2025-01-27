@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_finder_cd.fish:v6.1.0
+# @halostatue/fish-macos/functions/__macos_finder_cd.fish:v7.0.0
 
 function __macos_finder_cd
     argparse --name 'finder cd' h/help -- $argv
@@ -14,5 +14,5 @@ Options:
         return 0
     end
 
-    cd (__macos_finder_pwd_get $argv[1])
+    cd (__macos_finder_pwd::get $argv[1])
 end

@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/manp.fish:v6.1.0
+# @halostatue/fish-macos/functions/manp.fish:v7.0.0
 
 # Based on man2pdf.sh created by Pico Mitchell (of Random Applications)
 # on 11/16/22, licensed under the MIT license.
@@ -34,7 +34,7 @@ they will be cleared on any OS upgrade.'
     if test -f $man_path
         # Save every man page PDF into a sub-folder for the current OS version
         # (and build) since man pages can be updated between OS versions, and
-        # don't want to retrieve an old cached version from a preivous OS
+        # don't want to retrieve an old cached version from a previous OS
         # (when not saving to a temporary location).
         set --local os_path $cache_path"/"(/usr/bin/sw_vers -productVersion)" ("(/usr/bin/sw_vers -buildVersion)")"
 

@@ -1,4 +1,77 @@
-# @halostatue/fish-macos/functions/finder.fish:v6.1.0
+# @halostatue/fish-macos/functions/finder.fish:v7.0.0
+
+function __macos_finder_defaults::query
+    set --query argv[1]
+    or return 1
+
+    set --function value (defaults read com.apple.Finder $argv[1] 2>/dev/null)
+    or return 1
+
+    switch $value
+        case 1
+            true
+        case '*'
+            false
+    end
+end
+
+function __macos_finder_defaults::set
+    set --query argv[1]
+    or return 1
+
+    set --query argv[2]
+    or return 1
+
+    defaults write com.apple.Finder $argv[1] -bool $argv[2]
+    and killall Finder
+end
+
+function __macos_finder_pwd::get
+    set --function window 1
+
+    if set --query argv[1]
+        set window $argv[1]
+    end
+
+    echo 'tell application "Finder"
+  if ('$window' <= (count Finder windows)) then
+    get POSIX path of (target of window '$window' as alias)
+  else
+    get POSIX path of (desktop as alias)
+  end if
+end tell' | osascript
+end
+function __macos_finder_pwd::update
+    argparse --exclusive column,list,icon column list icon -- $argv
+    or return 1
+
+    set --function window_count 1
+    set --function view ''
+    set --function view_type ''
+
+    if set --query _flag_column
+        set view_type column
+    else if set --query _flag_list
+        set view_type list
+    else if set --query _flag_icon
+        set view_type icon
+    end
+
+    if test $view_type != ''
+        set view 'set the current view of the front Finder window to '$view_type' view'
+    end
+
+    set --query argv[1]; and set window_count $argv[1]
+
+    echo 'tell application "Finder"
+  if ('$window_count' <= (count Finder windows)) then
+    set the target of window '$window_count' to (POSIX file "'$PWD'") as string
+  else
+    open (POSIX file "'$PWD'") as string
+  end if
+ ' $view '
+end tell' | osascript >/dev/null
+end
 
 # Based on bashfinder: https://github.com/NapoleonWils0n/bashfinder.git
 # and my port to zsh.
@@ -54,7 +127,7 @@ Options:
         case column
             __macos_finder_column $argv
         case pwd
-            __macos_finder_pwd_get $argv[1]
+            __macos_finder_pwd::get $argv[1]
         case pushd
             __macos_finder_pushd $argv
         case quarantine

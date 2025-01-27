@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/completions/app.fish:v6.1.0
+# @halostatue/fish-macos/completions/app.fish:v7.0.0
 
 complete --command app --erase
 
@@ -30,7 +30,7 @@ for subcommand in bundleid find
         --short-option a --long-option all --description 'Show all matches'
 
     complete --command app --condition '__fish_seen_subcommand_from '$subcommand \
-        --short-option q --long-option quiet --description 'Quiet (show no ouptut)'
+        --short-option q --long-option quiet --description 'Quiet (show no output)'
 
     complete --command app --condition '__fish_seen_subcommand_from '$subcommand \
         --short-option h --long-option help --description 'Help for app '$subcommand

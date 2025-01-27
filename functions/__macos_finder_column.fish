@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_finder_column.fish:v6.1.0
+# @halostatue/fish-macos/functions/__macos_finder_column.fish:v7.0.0
 
 function __macos_finder_column
     argparse --name 'finder column' h/help -- $argv
@@ -14,5 +14,5 @@ Options:
         return 0
     end
 
-    __macos_finder_pwd_update --column $argv
+    __macos_finder_pwd::update --column $argv
 end

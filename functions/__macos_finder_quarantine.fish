@@ -1,4 +1,16 @@
-# @halostatue/fish-macos/functions/__macos_finder_quarantine.fish:v6.1.0
+# @halostatue/fish-macos/functions/__macos_finder_quarantine.fish:v7.0.0
+
+function __macos_finder_quarantine::run
+    set --query argv[1]
+    or return 1
+
+    set --function databases ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV*
+    set --function cmd sqlite3 -separator ' | '
+
+    for db in $databases
+        $cmd $db $argv
+    end
+end
 
 function __macos_finder_quarantine
     argparse --name 'finder quarantine' h/help -- $argv
@@ -25,13 +37,13 @@ Options:
 
     switch $verb
         case show ''
-            __macos_finder_quarantine_run "
+            __macos_finder_quarantine::run "
 SELECT LSQuarantineAgentName, LSQuarantineDataURLString
   FROM LSQuarantineEvent
  WHERE LSQuarantineDataURLString != ''
  ORDER BY LSQuarantineAgentName, LSQuarantineDataURLString;"
         case clear
-            __macos_finder_quarantine_run 'DELETE FROM LSQuarantineEvent;'
+            __macos_finder_quarantine::run 'DELETE FROM LSQuarantineEvent;'
         case clean
             if not set --query argv[1]
                 echo >&2 'finder quarantine clean requires at least one file parameter'

@@ -1,4 +1,12 @@
-# @halostatue/fish-macos/functions/__macos_app_frontmost.fish:v6.1.0
+# @halostatue/fish-macos/functions/__macos_app_frontmost.fish:v7.0.0
+
+function __macos_app_frontmost::info
+    set --function value (lsappinfo info -only $argv[2] $argv[1] | string split =)[2]
+    or return 1
+
+    string replace --all '"' '' $value
+    return 0
+end
 
 function __macos_app_frontmost
     argparse --name 'app frontmost' \
@@ -49,22 +57,22 @@ Example:
     end
 
     if set --query _flag_name || set --query _flag_all
-        set --function name (__macos_app_frontmost_info $front name)
+        set --function name (__macos_app_frontmost::info $front name)
         or return 1
     end
 
     if set --query _flag_bundle_id || set --query _flag_all
-        set --function bundle_id (__macos_app_frontmost_info $front bundleID)
+        set --function bundle_id (__macos_app_frontmost::info $front bundleID)
         or return 1
     end
 
     if set --query _flag_path || set --query _flag_all
-        set --function bundle_path (__macos_app_frontmost_info $front bundlepath)
+        set --function bundle_path (__macos_app_frontmost::info $front bundlepath)
         or return 1
     end
 
     if set --query _flag_pid || set --query _flag_all
-        set --function pid (__macos_app_frontmost_info $front pid)
+        set --function pid (__macos_app_frontmost::info $front pid)
         or return 1
     end
 

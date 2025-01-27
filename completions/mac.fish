@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/completions/mac.fish:v6.1.0
+# @halostatue/fish-macos/completions/mac.fish:v7.0.0
 
 complete --command mac --erase
 
@@ -17,9 +17,6 @@ complete --command mac --arguments flushdns \
 complete --command mac --arguments font-smoothing \
     --exclusive --condition __fish_use_subcommand \
     --description 'Manages font smoothing settings'
-complete --command mac --arguments lock-screen \
-    --exclusive --condition __fish_use_subcommand \
-    --description 'Locks the screen'
 complete --command mac --arguments lsclean \
     --exclusive --condition __fish_use_subcommand \
     --description 'Cleans LaunchServices to remove duplicate Open with... entries'

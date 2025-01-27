@@ -9,7 +9,7 @@ Useful functions for macOS using [fish shell][fish].
 Install with [Fisher][fisher]:
 
 ```fish
-fisher install halostatue/fish-macos@v6
+fisher install halostatue/fish-macos@v7
 ```
 
 ### System Requirements
@@ -198,7 +198,7 @@ Shows or hides the desktop icons. Accepts a parameter `on` (show the files),
 `off` (hide the files), or `toggle`. If no parameter is given, shows the current
 state.
 
-### `has_app` (previously `has:app`)
+### `has_app`
 
 Returns true if one or more of the named MacOS application exists. This is a
 specialized wrapper around `app find` that always looks for exact matches.
@@ -230,17 +230,120 @@ Work with Mac AirPort configurations. Has the following subcommands:
 - `password`: Recovers the current AirPort network password, or the password for
   a specified SSID.
 
+#### `mac brightness`
+
+Increase or decrease the brightness level. This uses system event key codes.
+Supports `up` (increase brightness) and `down` (decrease brightness).
+
 #### `mac flushdns`
 
 Flush the MacOS DNS cache.
 
-#### `mac lock-screen`
+#### `mac font-smoothing`
 
-Locks the screen.
+Enables or disables font smoothing. If no apps are provided, sets the global
+font smoothing preference. If apps are provided, font smoothing will be set for
+each app. See `app bundleid` for how apps are resolved.
+
+`mac font-smoothing [options] off|on [APP...]`
 
 #### `mac lsclean`
 
 Clean LaunchServices to remove duplicate 'Open with...' entries.
+
+#### `mac mail`
+
+Performs operations on Mail.app configuration and database. Before running
+vacuum after any OS upgrade, Mail.app must have been opened at least once so
+that the database and index formats have been updated.
+
+Supported subcommands are:
+
+- `vacuum`: Vacuums the envelope index to improve performance.
+- `attachments inline`: Sets Mail.app attachment handling to inline.
+- `attachments icon`: Sets Mail.app attachment handling to icon.
+
+> This started as a process to speed up Mail.app by vacuuming the envelope index
+> with a history from a October 2007 [blog post][hawkwings] by Tim Gaden on the
+> Hawk Wings blog covering tips and tricks for Apple Mail. It turned into a
+> script by [pmbuko][pmbuko] and Romulo and variously updated by Brett Terpstra
+> (2012), Mathias Törnblom (2015), Andrei Miclaus (2017) before I ported it to
+> Fish in 2022.
+
+[hawkwings]: http://web.archive.org/web/20071008123746/http://www.hawkwings.net/2007/03/03/scripts-to-automate-the-mailapp-envelope-speed-trick/
+[pmbuko]: https://github.com/pmbuko
+
+#### `mac proxy-icon`
+
+Enables or disables the visibility of the proxy icon without delay. macOS
+versions older than Monterey always show the proxy icon.
+
+States:
+
+- `FLOAT`: Sets the display of the proxy icon to FLOAT fractional seconds.
+- `off`: Sets the display of the proxy icon to default.
+- `on` Sets the display of the proxy icon to 0 seconds.
+- `[status]`: Shows the duration of the proxy icon display.
+- `toggle`: Toggles the display of the proxy icon.
+
+When displaying `status`, `-q` or `--query` can be used to suppress the output.
+
+#### `mac serialnumber`
+
+Gets the serial number for the current macOS device.
+
+#### `mac touchid sudo`
+
+Enables or disables Touch ID support for `sudo`. Requires administrative
+permissions to edit `/etc/pam.d/sudo_local` and executes with `sudo`. If
+`pam_reattach` is installed, this will be managed as well.
+
+The following states may be specified:
+
+- `off`: Disables Touch ID.
+- `on`: Enables Touch ID.
+- `[status]`: Shows the status of Touch ID.
+- `toggle`: Toggles the status of Touch ID.
+
+##### Notes
+
+In v7 or later, `mac touchid sudo` only manages `/etc/pam.d/sudo_local`. It will
+halt if either `pam_tid` or `pam_reattach` are present in `/etc/pam.d/sudo` or
+if `/etc/pam.d/sudo` does not include `sudo_local`.
+
+`/etc/pam.d/sudo_local` survives reboots and operating system upgrades, so as
+long as the `pam_tid.so` and `pam_reattach.so` files are not missing or do not
+work, nothing will be broken.
+
+If something breaks while managing `/etc/pam.d/sudo_local`, recovery is easy:
+
+1. `open /etc/pam.d`
+2. Use ⌘⌫ in Finder on `sudo_local` to delete the file. Authenticate (possibly
+   with Touch ID), and everything is fixed.
+
+#### `mac transparency`
+
+Enables or disables interface transparency by setting the universal access
+"reduce transparency" setting.
+
+Valid states are:
+
+- `off`: Disables interface transparency
+- `on`: Enables interface transparency
+- `[status]`: Shows the status of interface transparency
+- `toggle`: Toggles interface transparency
+
+#### `mac version`
+
+Shows the current macOS version.
+
+Options include:
+
+- `-s`, `--simple`: Removes spaces from the version displayed
+- `-l`, `--lowercase`: Converts the version to all lowercase
+- `-c`, `--comparable`: Outputs the comparable version value
+- `-v`, `--version`: Outputs the macOS version (same as
+  `sw_vers -productVersion`)'
 
 #### `mac vol`
 

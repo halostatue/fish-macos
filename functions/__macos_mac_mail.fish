@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_mail.fish:v6.1.0
+# @halostatue/fish-macos/functions/__macos_mac_mail.fish:v7.0.0
 
 # Speed up Mail.app by vacuuming the Envelope Index
 # - Code from: http://web.archive.org/web/20071008123746/http://www.hawkwings.net/2007/03/03/scripts-to-automate-the-mailapp-envelope-speed-trick/
@@ -18,7 +18,7 @@ function __macos_mac_mail
 
 Performs operations on Mail.app configuration and database.
 
-Before running vaccuum after any OS upgrade, Mail.app must have been opened
+Before running vacuum after any OS upgrade, Mail.app must have been opened
 at least once so that the database and index formats have been updated.
 
 Subcommands:

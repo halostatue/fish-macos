@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_flushdns.fish:v6.1.0
+# @halostatue/fish-macos/functions/__macos_mac_flushdns.fish:v7.0.0
 
 function __macos_mac_flushdns
     argparse --name 'mac flushdns' h/help -- $argv

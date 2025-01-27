@@ -1,39 +1,61 @@
-# @halostatue/fish-macos/functions/__macos_mac_touchid_sudo.fish:v6.1.0
+# @halostatue/fish-macos/functions/__macos_mac_touchid_sudo.fish:v7.0.0
+
+# Massively simplified. This version _only_ works if /etc/pam.d/sudo includes `auth
+# include sudo_local` and requires manual removal of `pam_reattach` and `pam_tid` from
+# `/etc/pam.d/sudo` _manually_ if present.
+
+function __macos_mac_touchid_sudo::check_supported
+    if string match -rq '^\s*auth\s+include\s+sudo_local$' </etc/pam.d/sudo
+        return 0
+    end
+
+    echo "Unsupported sudo configuration, cannot find 'auth include sudo_local'. \
+      If your macOS installation supports 'include', add this at the top:" |
+        fmt -s >&2
+    printf >&2 "\n  auth       include        sudo_local\n\n"
+    printf >&2 "Once this has been added, try again.\n"
+
+    return 1
+end
+
+function __macos_mac_touchid_sudo::check_old_install
+    set --function found
+
+    string match -rq '^\s*auth\s+sufficient\s+pam_tid\.so' </etc/pam.d/sudo
+    and set --append found pam_tid
+
+    string match -rq '^\s*auth\s+optional\s+.+pam_reattach\.so' </etc/pam.d/sudo
+    and set --append found pam_reattach
+
+    if set --query found[1]
+        set found (string join ' and ' $found)
+        printf >&2 "Sudo support for "$found" present in /etc/pam.d/sudo.\n\n"
+        echo "This is unsupported by 'mac touchid sudo' and must be manually \
+          removed before continuing." | fmt -s >&2
+
+        return 0
+    end
+
+    return 1
+end
 
 function __macos_mac_touchid_sudo::print_status
     set --query _flag_quiet
-    or printf "%-12s: %s\n" $argv
+    or printf "%-15s: %s\n" $argv
 end
 
 function __macos_mac_touchid_sudo::remove_one
-    path is --type file --perm read
-    and grep $argv[1] $argv[2]
-    and sudo sed -i '' -e "/$argv[1]/d" $argv[2]
-end
-
-function __macos_mac_touchid_sudo::clean_macports_reattach
-    # Check for MacPorts pam_reattach to disable it in this version.
-    set --function files (path filter --type file --perm read /etc/pam.d/sudo_local /etc/pam.d/sudo)
-
-    if grep -q /opt/local/lib/pam/pam_reattach.so $files
-        echo >&2 "MacPorts pam_reattach detected. Removing for system safety."
-        echo >&2 "  Use a Homebrew or other installation that does not require"
-        echo >&2 "  sudo to install pam_reattach so that your system is not"
-        echo >&2 "  unusable if pam_reattach is missing or otherwise broken."
-
-        for file in $files
-            __macos_mac_touchid_sudo::remove_one pam_reattach $file
-        end
-    end
+    path is --type file --perm read /etc/pam.d/sudo_local
+    and grep -q $argv[1] /etc/pam.d/sudo_local
+    and sudo sed -i '' -e "/$argv[1]/d" /etc/pam.d/sudo_local
 end
 
 function __macos_mac_touchid_sudo::remove
     osascript -e 'tell application "System Preferences" to quit'
-    for file in /etc/pam.d/sudo_local /etc/pam.d/sudo
-        for ext in pam_reattach pam_tid
-            __macos_mac_touchid_sudo::remove_one {$ext} $file
-            and __macos_mac_touchid_sudo::print_status $ext disabled
-        end
+
+    for ext in pam_tid pam_reattach
+        __macos_mac_touchid_sudo::remove_one {$ext} /etc/pam.d/sudo_local
+        and __macos_mac_touchid_sudo::print_status $ext disabled
     end
 
     if ! test -s /etc/pam.d/sudo_local
@@ -42,112 +64,52 @@ function __macos_mac_touchid_sudo::remove
     end
 end
 
-function __macos_mac_touchid_sudo::add_local
-    set --function s
-
-    set --query argv[1]
-    and set --function reattach $argv[1]
-
-    # We *may* need to migrate from /etc/pam.d/sudo to /etc/pam.d/sudo_local
-    for ext in pam_reattach pam_tid
-        if grep -q $ext /etc/pam.d/sudo
-            echo >&2 "Moving $ext from /etc/pam.d/sudo to /etc/pam.d/sudo_local"
-            __macos_mac_touchid_sudo::remove_one $ext /etc/pam.d/sudo
-        end
-    end
-
-    if test -s /etc/pam.d/sudo_local
-        if ! grep -q pam_tid /etc/pam.d/sudo_local
-            set s (printf "%-10s %-14s %s" auth sufficient pam_tid.so)
-
-            if grep -q pam_reattach /etc/pam.d/sudo_local
-                sudo sed -i '' \
-                    -f (printf "/pam_reattach/a\\\%b%s\n" '\n' $s | psub) \
-                    /etc/pam.d/sudo_local
-            else
-                sudo sed -i '' \
-                    -f (printf "1i\\\%b%s\n" '\n' $s | psub) \
-                    /etc/pam.d/sudo_local
-            end
-            and __macos_mac_touchid_sudo::print_status pam_tid enabled
-        end
-
-        test -z "$reattach"
-        and return 0
-
-        if ! grep -q $reattach /etc/pam.d/sudo_local
-            if grep -q pam_reattach /etc/pam.d/sudo_local
-                echo >&2 "WARNING: pam_reattach is not configured with $reattach."
-                grep >&2 pam_reattach /etc/pam.d/sudo_local
-                echo >&2 "Removing."
-
-                __macos_mac_touchid_sudo::remove_one pam_reattach /etc/pam.d/sudo_local
-            end
-        end
-
-        if ! grep -q pam_reattach /etc/pam.d/sudo
-            set s (printf "%-10s %-14s %s" auth optional $reattach)
-
-            sudo sed -i '' \
-                -f (printf "/pam_tid\\.so/i\\\%b%s" '\n' $s | psub) \
-                /etc/pam.d/sudo
-            and __macos_mac_touchid_sudo::print_status pam_reattach enabled
-        end
-    else
-        set fish_trace 1
-        sudo touch /etc/pam.d/sudo_local
-
-        test -n "$reattach"
-        and printf "%-10s %-14s %s" auth optional $reattach |
-            sudo tee /etc/pam.d/sudo_local >/dev/null
-        and __macos_mac_touchid_sudo::print_status pam_reattach enabled
-
-        printf "%-10s %-14s %s" auth sufficient pam_tid.so |
-            sudo tee /etc/pam.d/sudo_local >/dev/null
-        and __macos_mac_touchid_sudo::print_status pam_tid enabled
-    end
-end
-
 function __macos_mac_touchid_sudo::add
-    osascript -e 'tell application "System Preferences" to quit'
-    __macos_mac_touchid_sudo::clean_macports_reattach
+    set --function targets
 
-    set --query argv[1]
-    and set --function reattach $argv[1]
+    test -f /etc/pam.d/sudo_local
+    or sudo touch /etc/pam.d/sudo_local
 
-    if path is --perm read --type file /etc/pam.d/sudo_local{,.template}
-        __macos_mac_touchid_sudo::add_local $reattach
+    if set --query argv[1]
+        set --function reattach $argv[1]
+
+        if string match -rq '^\s*auth\s+optional\s+'$argv[1] </etc/pam.d/sudo_local
+            if string match -rq '^\s*auth\s+sufficient\s+pam_tid\.so' </etc/pam.d/sudo_local
+                __macos_mac_touchid_sudo::print_status pam_reattach enabled
+                __macos_mac_touchid_sudo::print_status pam_tid enabled
+
+                return 0
+            end
+        end
+
+        set --append targets pam_reattach pam_tid
+    else if string match -rq '^\s*auth\s+sufficient\s+pam_tid\.so' </etc/pam.d/sudo_local
+        __macos_mac_touchid_sudo::print_status pam_tid enabled
     else
-        set --function s
+        set --append targets pam_tid
+    end
 
-        if ! grep -q 'pam_tid\.so' /etc/pam.d/sudo
-            set s (printf "%-10s %-14s %s" auth sufficient pam_tid.so)
+    osascript -e 'tell application "System Preferences" to quit'
 
-            sudo sed -i '' \
-                -f (printf "/^# sudo: auth account password session/a\\\%b%s\n" '\n' $s | psub) \
-                /etc/pam.d/sudo
-            and __macos_mac_touchid_sudo::print_status pam_tid enabled
+    for target in $targets
+        if grep -q $target /etc/pam.d/sudo_local
+            __macos_mac_touchid_sudo::remove_one $target /etc/pam.d/sudo_local
         end
+    end
 
-        test -z "$reattach"
-        and return 0
-
-        if ! grep -q $reattach /etc/pam.d/sudo && grep -q pam_reattach /etc/pam.d/sudo
-            echo >&2 "WARNING: pam_reattach is not configured with $reattach."
-            grep >&2 pam_reattach /etc/pam.d/sudo
-            echo >&2 "Removing."
-
-            __macos_mac_touchid_sudo::remove_one pam_reattach /etc/pam.d/sudo
+    if set --query reattach
+        printf "%-10s %-14s %s\n" \
+            auth optional $reattach \
+            auth sufficient pam_tid.so |
+            sudo tee -a /etc/pam.d/sudo_local >/dev/null
+        and begin
+            __macos_mac_touchid_sudo::print_status pam_reattach enabled
+            __macos_mac_touchid_sudo::print_status pam_tid enabled
         end
-
-        if ! grep -q pam_reattach /etc/pam.d/sudo
-            set s (printf "%-10s %-14s %s" auth optional $reattach)
-
-            sudo sed -i '' \
-                -f (printf "/pam_tid\\.so/i\\\%b%s" '\n' $s | psub) \
-                /etc/pam.d/sudo
-            and __macos_mac_touchid_sudo::print_status pam_reattach enabled
-        end
+    else
+        printf "%-10s %-14s %s\n" auth sufficient pam_tid.so |
+            sudo tee -a /etc/pam.d/sudo_local >/dev/null
+        and __macos_mac_touchid_sudo::print_status pam_tid enabled
     end
 end
 
@@ -177,18 +139,23 @@ Options:
         return 0
     end
 
+
+    __macos_mac_touchid_sudo::check_supported
+    or return
+
+    __macos_mac_touchid_sudo::check_old_install
+    and return
+
     set --function subcommand (string lower -- $argv[1])
     set --erase argv[1]
 
     switch $subcommand
         case on
-            for d in /opt/homebrew /usr/local /usr
-                for f in $d/lib/pam/pam_reattach.so*
-                    if test -f $f
-                        set --function reattach (string replace --all --regex / \\/ $f)
-                        break
-                    end
-                end
+            set --local reattach /opt/local /opt/homebrew /usr/local /usr
+            set reattach (path filter --type file $reattach/lib/pam/pam_reattach.so)
+
+            if set --query reattach[1]
+                set reattach (string replace --all --regex / \\/ $reattach[1])
             end
 
             __macos_mac_touchid_sudo::add $reattach
@@ -197,18 +164,18 @@ Options:
             __macos_mac_touchid_sudo::remove
 
         case status ''
-            set --function files (path filter --type file --perm read /etc/pam.d/sudo_local /etc/pam.d/sudo)
+            set --local pam_tid disabled
+            set --local pam_reattach disabled
 
-            set --function pam_tid disabled
-            set --function pam_reattach disabled
+            grep -q pam_tid.so /etc/pam.d/sudo_local
+            and set pam_tid enabled
 
-            grep -q pam_tid.so $files && set pam_tid enabled
-            grep -q pam_reattach.so $files && set pam_reattach enabled
+            grep -q pam_reattach.so /etc/pam.d/sudo_local
+            and set pam_reattach enabled
 
             if set --query _flag_quiet
                 test $pam_tid = enabled
             else
-
                 __macos_mac_touchid_sudo::print_status pam_tid $pam_tid
                 __macos_mac_touchid_sudo::print_status pam_reattach $pam_reattach
             end

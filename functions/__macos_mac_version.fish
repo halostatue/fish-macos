@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_version.fish:v6.1.0
+# @halostatue/fish-macos/functions/__macos_mac_version.fish:v7.0.0
 
 function __macos_mac_version
     argparse \
@@ -38,34 +38,38 @@ Options:
     end
 
     switch $os_version
-        case 100500
+        case 1005000
             set os_version Leopard
-        case 100600
+        case 1006000
             set os_version Snow Leopard
-        case 100700
+        case 1007000
             set os_version Lion
-        case 100800
+        case 1008000
             set os_version Mountain Lion
-        case 100900
+        case 1009000
             set os_version Mavericks
-        case 101000
+        case 1010000
             set os_version Yosemite
-        case 101100
+        case 1011000
             set os_version El Capitan
-        case 101200
+        case 1012000
             set os_version Sierra
-        case 101300
+        case 1013000
             set os_version High Sierra
-        case 101400
+        case 1014000
             set os_version Mojave
-        case 101500
+        case 1015000
             set os_version Catalina
-        case 110000
+        case 1100000
             set os_version Big Sur
-        case 120000
+        case 1200000
             set os_version Monterey
-        case 130000
+        case 1300000
             set os_version Ventura
+        case 1400000
+            set os_version Sonoma
+        case 1500000
+            set os_version Sequoia
         case '*'
             return 1
     end

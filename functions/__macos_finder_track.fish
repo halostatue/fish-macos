@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_finder_track.fish:v6.1.0
+# @halostatue/fish-macos/functions/__macos_finder_track.fish:v7.0.0
 
 function __macos_finder_track
     argparse --name 'finder track' h/help -- $argv
@@ -18,9 +18,9 @@ Options:
 
     if not functions --query __macos_finder_tracking
         function __macos_finder_tracking --on-variable PWD
-            __macos_finder_pwd_update
+            __macos_finder_pwd::update
         end
     end
 
-    __macos_finder_pwd_update
+    __macos_finder_pwd::update
 end

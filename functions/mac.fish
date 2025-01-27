@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/mac.fish:v6.1.0
+# @halostatue/fish-macos/functions/mac.fish:v7.0.0
 
 function mac --description 'Manage several macOS functions'
     argparse --stop-nonopt h/help -- $argv
@@ -32,13 +32,13 @@ Options:
     set --erase argv[1]
 
     switch $subcommand
-        case airdrop ad aird
+        case airdrop
             __macos_mac_airdrop $argv
-        case airport ap airp
+        case airport
             __macos_mac_airport $argv
-        case flushdns fl
+        case flushdns
             __macos_mac_flushdns $argv
-        case font-smoothing fo
+        case font-smoothing
             __macos_mac_font_smoothing $argv
         case lsclean
             __macos_mac_lsclean $argv
@@ -46,15 +46,15 @@ Options:
             __macos_mac_mail $argv
         case proxy-icon
             __macos_mac_proxy_icon $argv
-        case serialnumber sn
+        case serialnumber
             __macos_mac_serialnumber $argv
-        case touchid to
+        case touchid
             __macos_mac_touchid $argv
-        case transparency tr
+        case transparency
             __macos_mac_transparency $argv
-        case vol vo
+        case vol
             __macos_mac_vol $argv
-        case version ve
+        case version
             __macos_mac_version $argv
         case ''
             echo >&2 'mac: No command provided.'

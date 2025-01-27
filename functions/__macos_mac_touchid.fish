@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_touchid.fish:v6.1.0
+# @halostatue/fish-macos/functions/__macos_mac_touchid.fish:v7.0.0
 
 function __macos_mac_touchid
     argparse --name 'mac touchid' h/help q/quiet -- $argv

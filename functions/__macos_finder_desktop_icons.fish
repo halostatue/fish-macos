@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_finder_desktop_icons.fish:v6.1.0
+# @halostatue/fish-macos/functions/__macos_finder_desktop_icons.fish:v7.0.0
 
 function __macos_finder_desktop_icons
     argparse --name 'finder desktop-icons' h/help -- $argv
@@ -25,14 +25,14 @@ Options:
 
     switch $action
         case off
-            __macos_finder_defaults_set $key false
+            __macos_finder_defaults::set $key false
         case on
-            __macos_finder_defaults_set $key true
+            __macos_finder_defaults::set $key true
         case toggle
             if test (__macos_mac_defaults_query com.apple.Finder $key 1) -eq 1
-                __macos_finder_defaults_set $key false
+                __macos_finder_defaults::set $key false
             else
-                __macos_finder_defaults_set $key true
+                __macos_finder_defaults::set $key true
             end
         case status ''
             if test (__macos_mac_defaults_query com.apple.Finder $key 1) -eq 1

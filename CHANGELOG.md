@@ -1,5 +1,34 @@
 # fish-macos Changelog
 
+## 7.0.0 / 2025-01-27
+
+- Rewrote `mac touchid sudo` again to simplify.
+
+  - It now only works if your macOS specifies `auth include sudo_local` in
+    `/etc/pam.d/sudo`. The main file will no longer be edited. As a benefit,
+    `/etc/pam.d/sudo_local` survives reboots and operating system upgrades, so
+    as long as the `pam_tid.so` and `pam_reattach.so` files are not missing or
+    do not work, nothing will be broken.
+
+  - If `pam_tid` or `pam_reattach` are included in `/etc/pam.d/sudo`, execution
+    will halt for the user to remove those settings.
+
+  - The restriction on MacPorts `pam_reattach` has been lifted, because the
+    management of a broken `/etc/pam.d/sudo_local` is much easier to resolve:
+
+    1. `open /etc/pam.d`
+    2. Use ⌘⌫ in Finder on `sudo_local` to delete the file. Authenticate
+       (possibly with Touch ID), and everything is fixed.
+
+  - If `pam_tid` and `pam_reattach` are correctly installed, nothing changes. If
+    the path for `pam_reattach` has changed, both `pam_tid` and `pam_reattach`
+    will be replaced, which will probably trigger both a Touch ID authorization
+    request _and_ a password authorization request.
+
+- Updated `mac version` (which was two versions out of date).
+
+- Added more documentation.
+
 ## 6.1.0 / 2025-01-15
 
 - Added `mac brightness` to change the screen brightness. Adapted from

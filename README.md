@@ -1,8 +1,8 @@
 # halostatue/fish-macos
 
-Useful functions for macOS using [fish shell][fish].
-
 [![Version][version]](https://github.com/halostatue/fish-macos/releases)
+
+Useful functions for macOS using [fish shell][fish].
 
 ## Installation
 
@@ -15,7 +15,6 @@ fisher install halostatue/fish-macos@v7
 ### System Requirements
 
 - [fish][fish] 3.4+
-- [fisher][fisher] 4.0+
 
 Compatibility with macOS versions is maintained on a rolling basis. When
 possible, _backwards_ compatibility will be maintained as long as the
@@ -372,7 +371,17 @@ Add a note to Reminders.app.
 
 ## Licence
 
-[MIT](LICENCE.md)
+[MIT](./LICENCE.md)
+
+## Change Log
+
+[CHANGELOG](./CHANGELOG.md)
+
+## Contributing
+
+- [Contributing](./CONTRIBUTING.md)
+- [Contributors](./CONTRIBUTORS.md)
+- [Code of Conduct](./CODE_OF_CONDUCT.md)
 
 [version]: https://img.shields.io/github/tag/halostatue/fish-macos.svg?label=Version
 [fisher]: https://github.com/jorgebucaran/fisher

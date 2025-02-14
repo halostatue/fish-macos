@@ -7,17 +7,26 @@ on:
       - main
   workflow_dispatch:
 
+permissions: {}
+
 jobs:
   check:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: extractions/setup-just@v2
-      - uses: fish-shop/install-fish-shell@v1.0.40
-      - uses: fish-shop/indent-check@v1.0.28
-      - uses: fish-shop/syntax-check@v2.2.28
-      - uses: fish-shop/install-plugin@v2.3.30
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
+        with:
+          persist-credentials: false
+
+      - uses: extractions/setup-just@dd310ad5a97d8e7b41793f8ef055398d51ad4de6 #v2.0.0
+      - uses: fish-shop/install-fish-shell@ef880a0291cb5c708b09e6527e4952c16e81cf5e #v1.0.45
+      - uses: fish-shop/indent-check@aae7bd013b4d6bcef5549cc992997e66ae4de397 #v2.2.34
+      - uses: fish-shop/syntax-check@990dde2550f7edc94c21b470a598aef362e29dab #v2.2.33
+      - uses: fish-shop/install-plugin@669123fa5a63a74da4f5bff881c6dbedcb54a49d #v2.3.35
         with:
           plugin-manager: fisher
           plugins: IlanCosman/clownfish
-      - uses: fish-shop/run-fishtape-tests@v2.3.28
+      - uses: fish-shop/run-fishtape-tests@4ef3c6b2be4dcf8ca164995d8733a759b69d5719 #v2.3.33

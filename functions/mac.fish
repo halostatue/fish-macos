@@ -36,6 +36,8 @@ Options:
             __macos_mac_airdrop $argv
         case airport
             __macos_mac_airport $argv
+        case brightness
+            __macos_mac_brightness $argv
         case flushdns
             __macos_mac_flushdns $argv
         case font-smoothing

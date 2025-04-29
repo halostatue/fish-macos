@@ -9,12 +9,15 @@ Useful functions for macOS using [fish shell][fish].
 Install with [Fisher][fisher]:
 
 ```fish
-fisher install halostatue/fish-macos@v7
+fisher install halostatue/fish-utils-core@v3 halostatue/fish-macos@v7
 ```
+
+`halostatue/fish-macos` depends on `halostatue/fish-utils-core@v3` or later.
 
 ### System Requirements
 
 - [fish][fish] 3.4+
+- [halostatue/fish-utils-core][core]
 
 Compatibility with macOS versions is maintained on a rolling basis. When
 possible, _backwards_ compatibility will be maintained as long as the
@@ -386,3 +389,4 @@ Add a note to Reminders.app.
 [version]: https://img.shields.io/github/tag/halostatue/fish-macos.svg?label=Version
 [fisher]: https://github.com/jorgebucaran/fisher
 [fish]: https://github.com/fish-shell/fish-shell
+[core]: https://github.com/halostatue/fish-utils-core

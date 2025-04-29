@@ -1,5 +1,14 @@
 # fish-macos Changelog
 
+## 7.0.1 / 2025-04-29
+
+- Updated the `README` to indicate that `halostatue/fish-macos` depends on
+  `halostatue/fish-utils-core`, resolving [#4][issue-4]. Thanks for the report,
+  @iameven.
+
+- @Samasaur1 fixed a bug with `mac brightness` not working in [#19][pull-19].
+  Thanks for the contribution!
+
 ## 7.0.0 / 2025-01-27
 
 - Rewrote `mac touchid sudo` again to simplify.
@@ -206,3 +215,4 @@
 [scripting os x]: https://scriptingosx.com/2022/11/on-viewing-man-pages-ventura-update/
 [trash]: https://github.com/ali-rantakari/trash
 [bright]: https://github.com/mattmc3/macos.fish/blob/main/functions/bright.fish
+[issue-4]: https://github.com/halosttue/fish-macos/issues/4

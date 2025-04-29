@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/mac.fish:v7.0.0
+# @halostatue/fish-macos/functions/mac.fish:v7.0.1
 
 function mac --description 'Manage several macOS functions'
     argparse --stop-nonopt h/help -- $argv

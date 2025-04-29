@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/completions/finder.fish:v7.0.0
+# @halostatue/fish-macos/completions/finder.fish:v7.0.1
 
 complete --command finder --erase
 

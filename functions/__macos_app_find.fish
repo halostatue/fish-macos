@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_app_find.fish:v7.0.0
+# @halostatue/fish-macos/functions/__macos_app_find.fish:v7.0.1
 
 function __macos_app_find
     argparse --name 'app find' x/exact a/all q/quiet h/help -- $argv

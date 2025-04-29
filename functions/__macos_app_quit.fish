@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_app_quit.fish:v7.0.0
+# @halostatue/fish-macos/functions/__macos_app_quit.fish:v7.0.1
 
 function __macos_app_quit
     argparse --name 'app quit' x/exact r/restart h/help -- $argv

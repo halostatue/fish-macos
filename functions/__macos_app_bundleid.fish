@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_app_bundleid.fish:v7.0.0
+# @halostatue/fish-macos/functions/__macos_app_bundleid.fish:v7.0.1
 
 function __macos_app_bundleid
     argparse --name 'app bundleid' x/exact a/all h/help q/quiet s/short -- $argv

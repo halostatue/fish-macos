@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_finder_hidden.fish:v7.0.0
+# @halostatue/fish-macos/functions/__macos_finder_hidden.fish:v7.0.1
 
 function __macos_finder_hidden
     argparse --name 'finder hidden' h/help -- $argv

@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/conf.d/halostatue_fish_macos.fish:v7.0.0
+# @halostatue/fish-macos/conf.d/halostatue_fish_macos.fish:v7.0.1
 
 function _halostatue_fish_macos_uninstall -e halostatue_fish_macos_uninstall
     set --function functions app finder has_app mac manp note ql remind

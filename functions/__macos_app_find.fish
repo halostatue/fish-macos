@@ -10,7 +10,8 @@ function __macos_app_find
 Shows installed apps by the provided pattern or patterns. Searches for
 apps in /Applications, /Applications/Setapp, /Applications/Utilities,
 ~/Applications, /Appliciations/Xcode.app/Contents/Applications,
-/Developer/Applications, and /System/Applications.
+/Developer/Applications, /System/Applications, /Applications/Nix Apps,
+and ~/Applications/Home Manager Apps.
 
 Options:
   -x, --exact             Perform exact matches only
@@ -42,7 +43,9 @@ Examples:
         /$a/Utilities \
         /$a/Xcode.app/Contents/$a \
         /Developer/Applications \
-        /System/Applications
+        /System/Applications \
+        /$a/Nix\ Apps \
+        ~/$a/Home\ Manager\ Apps
 
     set --function found 0
 

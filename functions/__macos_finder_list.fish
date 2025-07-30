@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_finder_list.fish:v7.0.1
+# @halostatue/fish-macos/functions/__macos_finder_list.fish:v7.1.0
 
 function __macos_finder_list
     argparse --name 'finder list' h/help -- $argv

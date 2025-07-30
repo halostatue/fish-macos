@@ -1,5 +1,14 @@
 # fish-macos Changelog
 
+## 7.1.0 / 2025-07-30
+
+- @Samasaur1 fixed a typo in the contributors file. Sorry! [#26][pull-26]
+
+- @Samasaur1 added support for finding applications in `/Applications/Nix Apps/`
+  and `~/Applications/Home Manager Apps/`, where [nix-darwin][nix-darwin] and
+  [home-manager][home-manager] install applications, respectively. Thanks!
+  [#25][pull-25]
+
 ## 7.0.1 / 2025-04-29
 
 - Updated the `README` to indicate that `halostatue/fish-macos` depends on
@@ -207,12 +216,17 @@
 - Initial version
 
 [blog]: https://robservatory.com/open-postscript-files-in-preview-in-macos-ventura/
+[bright]: https://github.com/mattmc3/macos.fish/blob/main/functions/bright.fish
+[home-manager]: https://github.com/nix-community/home-manager
+[issue-4]: https://github.com/halosttue/fish-macos/issues/4
 [macos-trash]: https://github.com/sindresorhus/macos-trash
 [man2pdf.sh]: https://gist.github.com/PicoMitchell/619c12fd6a53ae6ec657514915d4edf9
+[nix-darwin]: https://github.com/nix-darwin/nix-darwin
 [oh-my-fish/plugin-osx]: https://github.com/oh-my-fish/plugin-osx
 [pico mitchell]: https://github.com/PicoMitchell
+[pull-19]: https://github.com/halosttue/fish-macos/pull/19
+[pull-25]: https://github.com/halosttue/fish-macos/pull/25
+[pull-26]: https://github.com/halosttue/fish-macos/pull/26
 [rmtrash]: http://www.nightproductions.net/cli.htm
 [scripting os x]: https://scriptingosx.com/2022/11/on-viewing-man-pages-ventura-update/
 [trash]: https://github.com/ali-rantakari/trash
-[bright]: https://github.com/mattmc3/macos.fish/blob/main/functions/bright.fish
-[issue-4]: https://github.com/halosttue/fish-macos/issues/4

@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_touchid_sudo.fish:v7.0.1
+# @halostatue/fish-macos/functions/__macos_mac_touchid_sudo.fish:v7.1.0
 
 # Massively simplified. This version _only_ works if /etc/pam.d/sudo includes `auth
 # include sudo_local` and requires manual removal of `pam_reattach` and `pam_tid` from

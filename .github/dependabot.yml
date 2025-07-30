@@ -5,3 +5,20 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    ignore:
+        - dependency-name: '*'
+          update-types: [version-update:semver-major]
+    commit-message:
+      prefix: 'deps'
+    groups:
+      fish-shop:
+        applies-to: version-updates
+        patterns:
+          - fish-shop/indent-check
+          - fish-shop/install-fish-shell
+          - fish-shop/install-plugin
+          - fish-shop/run-fishtape-tests
+          - fish-shop/syntax-check
+        update-types:
+          - minor
+          - patch

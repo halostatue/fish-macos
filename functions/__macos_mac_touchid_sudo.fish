@@ -139,7 +139,6 @@ Options:
         return 0
     end
 
-
     __macos_mac_touchid_sudo::check_supported
     or return
 

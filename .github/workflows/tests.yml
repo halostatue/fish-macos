@@ -10,6 +10,37 @@ permissions: {}
 
 jobs:
   check-fish:
-    uses: halostatue/halostatue/.github/workflows/fish-tests.yml@0fa19a3bec5383af45c771b04f06a0f4c0bc3bbd # v1.0.1
+    name: Check Fish
+    runs-on: ubuntu-latest
+
     permissions:
       contents: read
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        with:
+          egress-policy: block
+          allowed-endpoints: >
+            api.github.com:443
+            api.launchpad.net:443
+            azure.archive.ubuntu.com:80
+            esm.ubuntu.com:443
+            github.com:443
+            packages.microsoft.com:443
+            ppa.launchpadcontent.net:443
+            raw.githubusercontent.com:443
+            registry.npmjs.org:443
+
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
+        with:
+          persist-credentials: false
+
+      - uses: fish-shop/install-fish-shell@6bb2a3195509b2c33e2f8d057ab875f49cd37081 #v2.0.14
+      - uses: fish-shop/indent-check@965abe9686525131dfc7195cec5979ca0c213c54 #v2.2.60
+      - uses: fish-shop/syntax-check@c90721f4375aac460a0f73b1b8e837ccbccab0f5 #v2.2.59
+      - uses: fish-shop/install-plugin@48352eccd5d70a426292d9fdeab0e734f4b3bf82 #v2.3.62
+        with:
+          plugin-manager: fisher
+          plugins: IlanCosman/clownfish
+      - uses: fish-shop/run-fishtape-tests@7032926b1ab19d19f4dbf58cc5c7b8832b2c98c7 #v2.3.62

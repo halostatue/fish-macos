@@ -26,7 +26,6 @@ Options:
         return 1
     end
 
-
     if set --query _flag_exact
         set --function apps (__macos_app_find --exact $argv)
         or return 1

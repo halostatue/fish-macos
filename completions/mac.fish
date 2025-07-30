@@ -54,14 +54,12 @@ for subcommand in airdrop proxy-icon transparency
         --arguments status --description 'Shows the status of '$subcommand
 end
 
-
 complete --command mac --condition '__fish_seen_subcommand_from 'airport \
     --arguments scan --description 'Shows available networks'
 complete --command mac --condition '__fish_seen_subcommand_from 'airport \
     --arguments ssid --description 'Shows the SSID'
 complete --command mac --condition '__fish_seen_subcommand_from 'airport \
     --arguments password --description 'Gets the current WiFi network password'
-
 
 complete --command mac --condition '__fish_seen_subcommand_from 'font-smoothing \
     --arguments on --description 'Enables font smoothing; app IDs can be provided to limit control'

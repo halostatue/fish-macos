@@ -27,4 +27,4 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: KineticCafe/actions-dco@416cafbc9c07f26219d09981d9ac49ce29b5bfea # v1.3.4
+      - uses: KineticCafe/actions-dco@fb284c903a7673a3d4b0bdd104479a6f0d46dae7 # v1.3.6

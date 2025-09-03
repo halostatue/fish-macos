@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/has_app.fish:v7.1.0
+# @halostatue/fish-macos/functions/has_app.fish:v7.2.0
 
 function has_app --description 'Returns true if the named application exists'
     # Suppress these flags being passed to __macos_app_find

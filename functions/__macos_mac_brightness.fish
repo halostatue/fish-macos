@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_brightness.fish:v7.1.0
+# @halostatue/fish-macos/functions/__macos_mac_brightness.fish:v7.2.0
 
 function __macos_mac_brightness
     argparse --name 'mac brightness' h/help -- $argv

@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/completions/manp.fish:v7.1.0
+# @halostatue/fish-macos/completions/manp.fish:v7.2.0
 
 complete --command manp --erase
 complete --command manp --wraps man

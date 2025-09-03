@@ -1,5 +1,9 @@
 # fish-macos Changelog
 
+## 7.2.0 / 2025-09-02
+
+- Added support for macOS Tahoe.
+
 ## 7.1.0 / 2025-07-30
 
 - @Samasaur1 fixed a typo in the contributors file. Sorry! [#26][pull-26]

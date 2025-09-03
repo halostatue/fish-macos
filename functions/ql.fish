@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/ql.fish:v7.1.0
+# @halostatue/fish-macos/functions/ql.fish:v7.2.0
 
 function ql --description 'QuickLook a file or directory'
     # Updated based on https://gist.github.com/chockenberry/13c15466417b88e40f23e58df8091dac

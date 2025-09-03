@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_finder_desktop_icons.fish:v7.1.0
+# @halostatue/fish-macos/functions/__macos_finder_desktop_icons.fish:v7.2.0
 
 function __macos_finder_desktop_icons
     argparse --name 'finder desktop-icons' h/help -- $argv

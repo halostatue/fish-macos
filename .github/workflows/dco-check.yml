@@ -23,8 +23,8 @@ jobs:
             api.github.com:443
             github.com:443
 
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           persist-credentials: false
 
-      - uses: KineticCafe/actions-dco@416cafbc9c07f26219d09981d9ac49ce29b5bfea # v1.3.4
+      - uses: KineticCafe/actions-dco@43e19574828cd1ef1c7907849b6ba0f3b5530cfe # v1.3.7

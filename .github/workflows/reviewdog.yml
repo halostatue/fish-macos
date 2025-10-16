@@ -17,11 +17,11 @@ jobs:
 
     permissions:
       contents: read
-      pull-requests: write
+      pull-requests: write # Reviewdog comments on pull requests
 
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a # v2.13.1
         with:
           disable-sudo: true
           egress-policy: block
@@ -36,7 +36,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: reviewdog/action-typos@627388e238f182b925d9acd151432f9b68f1d666 # v1.17.2
+      - uses: reviewdog/action-typos@d5eb1bbcd1b3bfde596f6eeb470322727862fe98 # v1.19.0
 
   actionlint:
     if: ${{ github.event.action != 'closed' }}
@@ -45,11 +45,11 @@ jobs:
 
     permissions:
       contents: read
-      pull-requests: write
+      pull-requests: write # Reviewdog comments on pull requests
 
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a # v2.13.1
         with:
           disable-sudo: true
           egress-policy: block
@@ -61,4 +61,4 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: reviewdog/action-actionlint@e37e2ca68a70112d21e135229272da28ce2d0d5a # v1.66.1
+      - uses: reviewdog/action-actionlint@f00ad0691526c10be4021a91b2510f0a769b14d0 # v1.68.0

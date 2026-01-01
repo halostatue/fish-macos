@@ -272,7 +272,7 @@ Supported subcommands are:
 > (2012), Mathias Törnblom (2015), Andrei Miclaus (2017) before I ported it to
 > Fish in 2022.
 
-[hawkwings]: http://web.archive.org/web/20071008123746/http://www.hawkwings.net/2007/03/03/scripts-to-automate-the-mailapp-envelope-speed-trick/
+[hawkwings]: https://web.archive.org/web/20071008123746/http://www.hawkwings.net/2007/03/03/scripts-to-automate-the-mailapp-envelope-speed-trick/
 [pmbuko]: https://github.com/pmbuko
 
 #### `mac proxy-icon`

@@ -231,6 +231,6 @@
 [pull-19]: https://github.com/halosttue/fish-macos/pull/19
 [pull-25]: https://github.com/halosttue/fish-macos/pull/25
 [pull-26]: https://github.com/halosttue/fish-macos/pull/26
-[rmtrash]: http://www.nightproductions.net/cli.htm
+[rmtrash]: https://www.nightproductions.net/cli.htm
 [scripting os x]: https://scriptingosx.com/2022/11/on-viewing-man-pages-ventura-update/
 [trash]: https://github.com/ali-rantakari/trash

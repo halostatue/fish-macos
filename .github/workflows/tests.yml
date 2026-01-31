@@ -36,15 +36,15 @@ jobs:
             raw.githubusercontent.com:443
             registry.npmjs.org:443
 
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
 
-      - uses: fish-shop/install-fish-shell@b9f7419082b5244e811eb0b7469d4fada87b8f64 # v2.0.38
-      - uses: fish-shop/indent-check@a72c2afc9bf5df6edd9d1606f00f5ae77c106b08 # v2.2.84
-      - uses: fish-shop/syntax-check@ab163b4b0dbf0882c3b4a29141365bb539393968 # v2.2.83
-      - uses: fish-shop/install-plugin@e33eadebca83e95556716d925596af841d531be7 # v2.3.86
+      - uses: fish-shop/install-fish-shell@df09b9652ffb1ddac57400071342ce4014391c01 # v2.0.39
+      - uses: fish-shop/indent-check@ad1c27e91b10779f7e694c62e2817477a373f183 # v2.2.85
+      - uses: fish-shop/syntax-check@5892b6b7938572d247c213cf7d9fc246deb7f519 # v2.2.84
+      - uses: fish-shop/install-plugin@fcfecc2bcd40ce477739164c37aa86f52631b7ec # v2.3.87
         with:
           plugin-manager: fisher
           plugins: IlanCosman/clownfish
-      - uses: fish-shop/run-fishtape-tests@2037d047c8f426ad78d7dd427b7a818054ccdb2c # v2.3.86
+      - uses: fish-shop/run-fishtape-tests@3b7f633949af0a545abd4baa4194f8eb98584d96 # v2.3.87

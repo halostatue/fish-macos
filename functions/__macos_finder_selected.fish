@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_finder_selected.fish:v7.2.0
+# @halostatue/fish-macos/functions/__macos_finder_selected.fish:v7.3.0
 
 function __macos_finder_selected
     argparse --name 'finder selected' h/help -- $argv

@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_app_icon.fish:v7.2.0
+# @halostatue/fish-macos/functions/__macos_app_icon.fish:v7.3.0
 
 function __macos_app_icon
     argparse --name 'app quit' x/exact h/help 'o/output=' 'w/width=' -- $argv

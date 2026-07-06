@@ -1,0 +1,74 @@
+# This contains the macOS versions to be supported.
+
+- name: Leopard
+  version: '10.5'
+  comparable: '10_05_000'
+
+- name: Snow Leopard
+  version: '10.6'
+  comparable: '10_06_000'
+
+- name: Lion
+  version: '10.7'
+  comparable: '10_07_000'
+
+- name: Mountain Lion
+  version: '10.8'
+  comparable: '10_08_000'
+
+- name: Mavericks
+  version: '10.9'
+  comparable: '10_09_000'
+
+- name: Yosemite
+  version: '10.10'
+  comparable: '10_10_000'
+
+- name: El Capitan
+  version: '10.11'
+  comparable: '10_11_000'
+
+- name: Sierra
+  version: '10.12'
+  comparable: '10_12_000'
+
+- name: High Sierra
+  version: '10.13'
+  comparable: '10_13_000'
+
+- name: Mojave
+  version: '10.14'
+  comparable: '10_14_000'
+
+- name: Catalina
+  version: '10.15'
+  comparable: '10_15_000'
+
+# Big Sur reported itself as '10.16' _or_ '11' depending on context.
+- name: Big Sur
+  version: ['10.16', '11']
+  comparable: '11_00_000'
+
+- name: Monterey
+  version: '12'
+  comparable: '12_00_000'
+
+- name: Ventura
+  version: '13'
+  comparable: '13_00_000'
+
+- name: Sonoma
+  version: '14'
+  comparable: '14_00_000'
+
+- name: Sequoia
+  version: '15'
+  comparable: '15_00_000'
+
+- name: Tahoe
+  version: '26'
+  comparable: '26_00_000'
+
+- name: Golden Gate
+  version: '27'
+  comparable: '27_00_000'

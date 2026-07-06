@@ -1,7 +1,7 @@
-# @halostatue/fish-macos/functions/manp.fish:v7.2.0
+# @halostatue/fish-macos/functions/manp.fish:v7.3.0
 
-# Based on man2pdf.sh created by Pico Mitchell (of Random Applications)
-# on 11/16/22, licensed under the MIT license.
+# Based on man2pdf.sh created by Pico Mitchell (of Random Applications) on 11/16/22,
+# licensed under the MIT license.
 function manp --description 'View a man page as a PDF'
     set --function cache_path "/private/tmp/man PDFs"
 
@@ -32,18 +32,17 @@ they will be cleared on any OS upgrade.'
     set --function man_path (/usr/bin/man -w $argv 2> /dev/null)
 
     if test -f $man_path
-        # Save every man page PDF into a sub-folder for the current OS version
-        # (and build) since man pages can be updated between OS versions, and
-        # don't want to retrieve an old cached version from a previous OS
-        # (when not saving to a temporary location).
+        # Save every man page PDF into a sub-folder for the current OS version (and build)
+        # since man pages can be updated between OS versions, and don't want to retrieve
+        # an old cached version from a previous OS (when not saving to a temporary
+        # location).
         set --local os_path $cache_path"/"(/usr/bin/sw_vers -productVersion)" ("(/usr/bin/sw_vers -buildVersion)")"
 
         if not test -d $os_path
-            # If the man PDFs base path exists, but not the current OS sub-
-            # folder, that likely means that there has been an OS update
-            # since the last run, so clear the cache of the old man PDFs
-            # from the previous OS version by deleting the base path which
-            # will be re-created when the new latest OS sub-folder is
+            # If the man PDFs base path exists, but not the current OS sub- folder, that
+            # likely means that there has been an OS update since the last run, so clear
+            # the cache of the old man PDFs from the previous OS version by deleting the
+            # base path which will be re-created when the new latest OS sub-folder is
             # created below.
             if test -d $cache_path
                 /bin/rm -rf $cache_path

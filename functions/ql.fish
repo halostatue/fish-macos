@@ -1,6 +1,6 @@
-# @halostatue/fish-macos/functions/ql.fish:v7.2.0
+# @halostatue/fish-macos/functions/ql.fish:v7.3.0
 
-function ql --description 'QuickLook a file or directory'
+function ql --description 'QuickLook a file or directory' --wraps qlmanage
     # Updated based on https://gist.github.com/chockenberry/13c15466417b88e40f23e58df8091dac
     if set --query argv[1]
         qlmanage -p $argv >/dev/null 2>/dev/null

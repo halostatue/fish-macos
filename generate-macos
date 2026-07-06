@@ -1,0 +1,117 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "erb"
+require "yaml"
+
+FUNCTION_TEMPLATE = <<~ERB
+  # @halostatue/fish-macos/functions/__macos_mac_version.fish
+
+  function __macos_mac_version
+      argparse \\
+          --exclusive s,v \\
+          --exclusive l,v \\
+          --exclusive s,c \\
+          --exclusive l,c \\
+          --exclusive v,c \\
+          h/help s/simple l/lowercase v/version c/comparable -- $argv
+  
+      if set --query _flag_help
+          echo 'Usage: mac version [options]
+  
+  Shows the current mac version.
+  
+  Options:
+      -s, --simple          Removes spaces from the version displayed
+      -l, --lowercase       Converts the version to all lowercase
+      -c, --comparable      Outputs the comparable version value
+      -v, --version         Outputs the macOS version (same as sw_vers -productVersion)'
+          return 0
+      end
+  
+      set --function os_version (sw_vers -productVersion)
+  
+      if set --query _flag_version
+          echo $os_version
+          return $status
+      end
+  
+      set os_version (__macos_version_to_comparable $os_version)
+      or return 1
+  
+      if set --query _flag_comparable
+          echo $os_version
+          return 0
+      end
+  
+      switch $os_version
+    <% entries.each do |e| -%>
+          case <%= e[:comparable].gsub('_', '') %>
+              set os_version <%= e[:name] %>
+    <% end -%>
+          case '*'
+              return 1
+      end
+  
+      if set --query _flag_simple
+          set os_version (string replace --all ' ' '' "$os_version")
+      end
+  
+      if set --query _flag_lowercase
+          set os_version (string lower -- "$os_version")
+      end
+  
+      echo $os_version
+  end
+ERB
+
+def case_parts(name, versions)
+  versions.flat_map {
+    version = it.to_s
+
+    if version.end_with?(".*")
+      raise "Invalid version for #{name}: it must not end with '.*'"
+    end
+
+    [version, "'#{version}.*'"]
+  }
+end
+
+def display_version(versions) = versions.max
+
+def render(template, binding_source) = ERB.new(template, trim_mode: "-").result(binding_source)
+
+versions = YAML.safe_load_file(File.join(__dir__, "versions.yaml"))
+
+entries = versions.map do |v|
+  name = v["name"]
+  full_name = name.downcase
+  slug = full_name.delete(" ")
+
+  if name == full_name
+    raise "Invalid configuration for #{name}: name should have capitals (Golden Gate)"
+  end
+
+  versions = Array(v["version"])
+
+  parts = case_parts(name, versions)
+  parts << slug
+  parts << "'#{full_name}'" if full_name != slug
+
+  {
+    name: name,
+    slug: slug,
+    case_parts: parts.join(" "),
+    comparable: v["comparable"],
+    display_version: display_version(versions)
+  }
+end
+
+# Generate function
+File.write(
+  File.join(__dir__, "functions", "__macos_mac_version.fish"),
+  render(FUNCTION_TEMPLATE, binding)
+)
+
+puts "Generated:"
+puts "  functions/__macos_mac_version.fish"

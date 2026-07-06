@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_version.fish:v7.2.0
+# @halostatue/fish-macos/functions/__macos_mac_version.fish:v7.3.0
 
 function __macos_mac_version
     argparse \
@@ -70,8 +70,10 @@ Options:
             set os_version Sonoma
         case 1500000
             set os_version Sequoia
-        case 1600000 2600000
+        case 2600000
             set os_version Tahoe
+        case 2700000
+            set os_version Golden Gate
         case '*'
             return 1
     end

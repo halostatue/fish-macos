@@ -1,6 +1,7 @@
 # halostatue/fish-macos
 
 [![Version][version]](https://github.com/halostatue/fish-macos/releases)
+[![MIT](https://img.shields.io/badge/licence-MIT-blue?style=for-the-badge "MIT")](https://github.com/halostatue/fish-macos/blob/main/LICENCE.md)
 
 Useful functions for macOS using [fish shell][fish].
 

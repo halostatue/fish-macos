@@ -1,5 +1,11 @@
 # fish-macos Changelog
 
+## 7.3.0 / 2025-07-05
+
+- Added support for macOS 27 Golden Gate for version detection. Other features
+  may or may not work. Do not submit bug reports on this version of macOS until
+  after macOS 27 is released.
+
 ## 7.2.0 / 2025-09-02
 
 - Added support for macOS Tahoe.

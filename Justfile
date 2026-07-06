@@ -79,6 +79,10 @@ tag version:
         git tag v{{ version }}
     end
 
+# Generate macOS version templates
+generate-macos:
+    @ruby generate-macos
+
 # Format fish files
 fmt:
     @fish_indent --write **.fish

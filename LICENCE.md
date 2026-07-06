@@ -1,20 +1,16 @@
 # Licence
 
-- SPDX-License-Identifier: [MIT][mit]
+<!-- SPDX-License-Identifier: MIT -->
 
-Copyright © 2019–2025 Austin Ziegler
+`halostatue/fish-macos` is copyright © 2019-2025 Austin Ziegler and is licensed
+under the MIT license. Some functions derived from oh-my-fish/plugin-osx,
+copyright 2014 Brun Ferreira Pinto. `mac mail` function shared originally on the
+Hawk Wings blog Romulo based on a script by "pmbuko". It was subsequently
+updated by Brett Terpstra in 2012, Mathias Törnblom in 2015, and Andrei Miclaus
+in 2017. From version 5.0, `manp` is based on man2pdf.sh created by Pico
+Mitchell (of Random Applications) on 11/16/22, licensed under the MIT license.
 
-Some functions derived from oh-my-fish/plugin-osx, copyright 2014 Brun Ferreira
-Pinto.
-
-`mac mail` function shared originally on the Hawk Wings blog Romulo based on a
-script by "pmbuko". It was subsequently updated by Brett Terpstra in 2012,
-Mathias Törnblom in 2015, and Andrei Miclaus in 2017.
-
-From version 5.0, `manp` is based on man2pdf.sh created by Pico Mitchell (of
-Random Applications) on 11/16/22, licensed under the MIT license.
-
-The software in this repository is made available under the MIT license.
+- SPDX License Description: [MIT][mit]
 
 ## MIT License
 

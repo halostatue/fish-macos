@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_font_smoothing.fish:v7.2.0
+# @halostatue/fish-macos/functions/__macos_mac_font_smoothing.fish:v7.3.0
 
 function __macos_mac_font_smoothing
     argparse --name 'mac font-smoothing' h/help -- $argv

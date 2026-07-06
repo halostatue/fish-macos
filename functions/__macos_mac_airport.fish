@@ -1,4 +1,4 @@
-# @halostatue/fish-macos/functions/__macos_mac_airport.fish:v7.2.0
+# @halostatue/fish-macos/functions/__macos_mac_airport.fish:v7.3.0
 
 function __macos_mac_airport::ssid
     __macos_mac_airport::run -I | string replace --filter --regex '\s+SSID: (\S+)' '$1'

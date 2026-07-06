@@ -1,14 +1,16 @@
-# @halostatue/fish-macos/functions/__macos_mac_mail.fish:v7.2.0
+# @halostatue/fish-macos/functions/__macos_mac_mail.fish:v7.3.0
 
 # Speed up Mail.app by vacuuming the Envelope Index
 # - Code from: https://web.archive.org/web/20071008123746/http://www.hawkwings.net/2007/03/03/scripts-to-automate-the-mailapp-envelope-speed-trick/
 # - Originally by "pmbuko" with modifications by Romulo
 # - Updated by Brett Terpstra 2012
-# - Updated by Mathias Törnblom 2015 to support V3 in El Capitan and still keep backwards compatibility
+# - Updated by Mathias Törnblom 2015 to support V3 in El Capitan and still keep backwards
+#   compatibility
 # - Updated by Andrei Miclaus 2017 to support V4 in Sierra
-# - Updated by Austin Ziegler 2022 to not actually care what the OS version is (and translated to fish). The only
-#   restriction is that you must have opened Mail.app at least once on any OS upgrade so that if any version changes
-#   have happened, Mail.app has taken care of that for you.
+# - Updated by Austin Ziegler 2022 to not actually care what the OS version is (and
+#   translated to fish). The only restriction is that you must have opened Mail.app at
+#   least once on any OS upgrade so that if any version changes have happened, Mail.app
+#   has taken care of that for you.
 function __macos_mac_mail
     argparse --name 'mac mail' h/help -- $argv
     or return 1
